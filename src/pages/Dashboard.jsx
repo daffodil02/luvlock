@@ -167,8 +167,9 @@ export default function Dashboard() { // Main Dashboard component
               <input 
                 type="text" 
                 placeholder="Search @username or #tag"
-                // Interactive styling for the search input
-                className="w-full bg-pink-50/50 dark:bg-pink-900/10 border-2 border-pink-200 dark:border-pink-900/50 focus:border-pink-400 dark:focus:border-pink-500 focus:ring focus:ring-pink-200 dark:focus:ring-pink-900 focus:ring-opacity-50 rounded-2xl py-3 px-4 pr-12 text-gray-700 dark:text-gray-200 font-medium transition-all"
+                // Change: We added 'outline-none' to remove that default black browser line,
+                // and changed focus:border to your new dark pink brand shade (pink-600)!
+                className="w-full bg-pink-50/50 dark:bg-pink-900/10 border-2 border-pink-200 dark:border-pink-900/50 focus:border-pink-600 dark:focus:border-pink-500 outline-none focus:ring focus:ring-pink-200 dark:focus:ring-pink-900 focus:ring-opacity-50 rounded-2xl py-3 px-4 pr-12 text-gray-700 dark:text-gray-200 font-medium transition-all"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)} // Update state as the user types
               />

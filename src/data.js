@@ -36,66 +36,75 @@ export const fetchOrdersData = (url, mockFallback) => {
       complete: (results) => { // Callback function that runs when parsing is done
         const rows = results.data; // The raw rows of data from the spreadsheet
         const allOrders = []; // Array to store processed order objects
-        let currentSectionCode = 'N/A'; // Keeps track of the current section (e.g., #DAYBREAK)
+        let currentSectionCode = 'N/A'; // Keeps track of the current block section (e.g., #DAYBREAK)
         let currentSectionLink = ''; // Stores the link associated with the current section
         let currentHeaders = null; // Stores the column headers (e.g., USERNAME, STATUS)
         let lastUsername = ''; // Used for "forward filling" usernames in merged rows
+        let lastTag = '';      // Used for "forward filling" tags (e.g. #XY11) if it's a column
 
-        rows.forEach((row) => { // Loop through every row in the spreadsheet
-          const rowText = row.join(' '); // Merge all cells into one string to search for URLs
-          const urlMatch = rowText.match(/https?:\/\/[^\s,]+/); // Regular expression to find a URL in the text
+        rows.forEach((row) => {
+          const rowText = row.join(' ');
+          const urlMatch = rowText.match(/https?:\/\/[^\s,]+/);
+          
+          // Helper: Count how many non-empty cells are in this row
+          const nonEmojiCells = row.filter(cell => (cell + '').trim().length > 0).length;
 
-          // 1. Detect Section Header (e.g. #DAYBREAK)
-          // Look for a cell starting with '#' that isn't the main header row
+          // 1. Detect Block Section Header (e.g. #DAYBREAK4)
+          // Look for a cell starting with '#' but ONLY if the row is mostly empty (Block Architecture)
           const potentialCode = row.find(cell => (cell + '').trim().startsWith('#'));
-          if (potentialCode && !row.some(cell => (cell+'').toUpperCase().includes('USERNAME'))) {
-            currentSectionCode = potentialCode.split('(')[0].trim(); // Extract the code part
-            currentSectionLink = ''; // Reset link because we are in a new section
-            currentHeaders = null;   // Reset headers because the new section might have different columns
-            return; // Skip to the next row
+          if (potentialCode && nonEmojiCells < 3 && !row.some(cell => (cell+'').toUpperCase().includes('USERNAME'))) {
+            currentSectionCode = (potentialCode + '').split('(')[0].trim();
+            currentSectionLink = ''; 
+            currentHeaders = null;   // Reset headers for new block
+            return;
           }
 
-          // 2. Detect Section Link (found in a row between the Section Code and the Table Headers)
+          // 2. Detect Section Link (reference link for the whole block)
           if (!currentHeaders && urlMatch) {
-            currentSectionLink = urlMatch[0]; // Save the first URL we find as the section's reference link
-            return; // Skip to the next row
+            currentSectionLink = urlMatch[0];
+            return;
           }
 
-          // 3. Detect Table Headers
-          // If a row contains the word 'USERNAME', we assume this row defines the columns
+          // 3. Detect Table Headers (e.g. USERNAME, SPECIFICATION)
           if (row.some(cell => typeof cell === 'string' && cell.toUpperCase().includes('USERNAME'))) {
-            currentHeaders = row.map(h => (h || '').trim().toUpperCase()); // Save headers in uppercase for consistency
-            return; // Skip to next row
+            currentHeaders = row.map(h => (h || '').trim().toUpperCase());
+            return;
           }
 
           // 4. Process Actual Data Rows
-          if (currentHeaders) { // Only process if we've already found headers for the current section
-            const hasData = row.some((cell, i) => (cell + '').trim().length > 0); // Check if row is not empty
+          if (currentHeaders) {
+            const hasData = row.some((cell, i) => (cell + '').trim().length > 0);
             if (hasData) {
-              const order = { // Create a new order object
-                CODE: currentSectionCode, // Link it to the current section code
-                SECTION_LINK: currentSectionLink // Link it to the current section reference
+              const order = { 
+                CODE: currentSectionCode, // Default to the block code (#DAYBREAK)
+                SECTION_LINK: currentSectionLink 
               };
               
-              currentHeaders.forEach((header, i) => { // Go through each header and assign the cell value to the order object
-                let val = (row[i] || '').trim(); // Get the value from the current row and column index
-                
-                // Extract any specific link found inside a cell (e.g. a tracking link in REMARKS)
+              currentHeaders.forEach((header, i) => {
+                let val = (row[i] || '').trim();
                 const cellUrl = val.match(/https?:\/\/[^\s,]+/);
-                if (cellUrl) order.CELL_LINK = cellUrl[0]; // Store it as a specific cell link
+                if (cellUrl) order.CELL_LINK = cellUrl[0];
 
-                if (header === 'USERNAME') { // Handle merged username cells
-                  if (val) lastUsername = val; // If cell has a name, remember it
-                  else val = lastUsername; // If cell is empty, use the last remembered name (Forward Fill)
+                // Logic for "Column-based" Tags (e.g. #XY11 in the first column)
+                // This handles tables where the order code is a column that might be merged.
+                if (header === 'TAG' || header === 'BATCH') {
+                  if (val && val.startsWith('#')) lastTag = val; // Remember the new tag
+                  else if (!val) val = lastTag; // Forward fill if merged
+                  order.CODE = val; // Override the order code with the specific row tag
                 }
-                if (header) order[header] = val; // Assign the value to the object using the header name as the key
+
+                if (header === 'USERNAME') {
+                  if (val) lastUsername = val;
+                  else val = lastUsername; // Forward fill username
+                }
+                
+                if (header) order[header] = val;
               });
 
-              // Validation: Only add if there is a username and specification (standard for an order)
+              // Final check: must have a username and something they ordered (SPECIFICATION)
               if (order.USERNAME && order.SPECIFICATION) {
-                // Determine final link: cell link (specific tracking) takes priority over section link (general info)
                 order.FINAL_LINK = order.CELL_LINK || order.SECTION_LINK;
-                allOrders.push(order); // Add finished order to our list
+                allOrders.push(order);
               }
             }
           }

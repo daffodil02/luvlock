@@ -21,8 +21,8 @@ export default function OngoingGO() { // Define the component for the 'Ongoing G
       exit={{ opacity: 0, y: -10 }} // Fades out and slides up when navigating away
       className="space-y-6" // Adds consistent vertical spacing between children
     >
-      {/* Page Header: A colorful banner section */}
-      <div className="bg-gradient-to-tr from-pink-500 to-rose-400 dark:from-pink-600 dark:to-rose-900 rounded-3xl p-8 text-white shadow-xl shadow-pink-200/50 dark:shadow-none relative overflow-hidden">
+      {/* Page Header: A colorful banner section matched exactly with your Masterlist page! */}
+      <div className="bg-pink-500 rounded-3xl p-8 text-white shadow-xl shadow-pink-200/80 dark:shadow-none relative overflow-hidden">
         <div className="absolute top-[-10%] right-[-5%] opacity-10 text-8xl rotate-12">🛍️</div> {/* Subtle background icon */}
         <div className="relative z-10">
           <h1 className="text-3xl font-bold mb-3 flex items-center gap-3">

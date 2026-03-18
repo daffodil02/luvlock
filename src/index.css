@@ -5,17 +5,18 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  /* Change: Custom Luvlock Pink scale to match the logo's specific bubblegum magenta shade */
-  --color-pink-50: #fff1f2;
-  --color-pink-100: #ffe4e6;
-  --color-pink-200: #fecdd3;
-  --color-pink-300: #fda4af;
-  --color-pink-400: #fb7185;
-  --color-pink-500: #e9528d;
-  --color-pink-600: #c5336d;
-  --color-pink-700: #be185d;
-  --color-pink-800: #9d174d;
-  --color-pink-900: #881337;
+  /* Change: Official Luvlock Logo Palette integration for a perfect brand match! */
+  --color-pink-50: #FFDFEA;  /* Match: Logo Lightest - Soft Cloud Pink */
+  --color-pink-100: #FFF0F5; /* Tapered transition */
+  --color-pink-200: #F9B0CC; /* Match: Logo Soft Pink - Bubblegum highlight */
+  --color-pink-300: #F69ABF; /* Derived */
+  --color-pink-400: #EB7EA3; /* Match: Logo Medium - Signature Magenta */
+  --color-pink-500: #EA7097; /* Match: Logo Vibrant - Primary Button Pink */
+  --color-pink-600: #D24978; /* Match: Logo Deep - Heading & Icon Accent */
+  --color-pink-700: #B73D68; /* Derived */
+  --color-pink-800: #933154; /* Derived */
+  --color-pink-900: #4a152c; /* Original Luvlock Charcoal */
+
   --font-header: 'Baloo 2', cursive;
   --font-body: 'Delius', cursive;
   --animate-bounce-slow: bounce 3s linear infinite;
@@ -24,22 +25,22 @@
 @layer base {
   body {
     background-color: var(--color-pink-50);
-    color: #4a152c;
+    color: var(--color-pink-900);
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
     min-height: 100vh;
-    /* Custom vertical stripes for a premium Luvlock feel */
+    /* Custom vertical stripes using your official brand 'D24978' shade at 5% opacity for a premium feel */
     background-image: repeating-linear-gradient(
       90deg,
-      rgba(233, 82, 141, 0.03) 0px,
-      rgba(233, 82, 141, 0.03) 40px,
+      rgba(210, 73, 120, 0.05) 0px,
+      rgba(210, 73, 120, 0.05) 40px,
       transparent 40px,
       transparent 80px
     );
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
-  /* Applying 'Agbalumo' to the headers, navbar, and logo text */
+  /* Applying 'Baloo 2' to titles for that chunky, sticker-like brand feel */
   h1, h2, h3, h4, h5, h6, nav, .brand-font {
     font-family: var(--font-header);
     letter-spacing: 0.02em;
@@ -49,15 +50,13 @@
 
 /* --- Dark Mode Body Styles --- */
 html.dark body {
-  /* Change: Switched to a deep 'Raspberry Charcoal' (#1a0a10) to keep the pink theme alive even in dark mode */
-  background-color: #1a0a10; 
-  /* Softer light pink for text in dark mode */
-  color: var(--color-pink-100);
-  /* Change: Using subtle dark pink stripes for the pattern instead of dots */
+  /* Switched to a deep 'Logo Maroon' (#2a0a14) to keep the pink theme alive */
+  background-color: #2a0a14; 
+  color: var(--color-pink-200);
   background-image: repeating-linear-gradient(
     90deg,
-    rgba(233, 82, 141, 0.02) 0px,
-    rgba(233, 82, 141, 0.02) 40px,
+    rgba(234, 112, 151, 0.03) 0px,
+    rgba(234, 112, 151, 0.03) 40px,
     transparent 40px,
     transparent 80px
   );
