@@ -380,15 +380,15 @@ export default function Dashboard() { // Main Dashboard component
                   <span className="text-3xl font-black text-gray-800 dark:text-gray-100">{totalItems}</span>
                   <div className="w-8 h-1 bg-pink-100 dark:bg-pink-900/30 rounded-full" />
                 </div>
-                <div className="glass rounded-3xl p-4 md:p-5 flex flex-col items-center justify-center text-center space-y-1 border-green-100 dark:border-green-900/30">
-                  <span className="text-[10px] font-bold uppercase text-green-500 tracking-wider">Arrived PA 🚚</span>
-                  <span className="text-3xl font-black text-gray-800 dark:text-gray-100">{arrivedItems}</span>
-                  <div className="w-8 h-1 bg-green-100 dark:bg-green-900/30 rounded-full" />
-                </div>
                 <div className="glass rounded-3xl p-4 md:p-5 flex flex-col items-center justify-center text-center space-y-1 border-blue-100 dark:border-blue-900/30">
                   <span className="text-[10px] font-bold uppercase text-blue-500 tracking-wider">On The Way ✈️</span>
                   <span className="text-3xl font-black text-gray-800 dark:text-gray-100">{otwItems}</span>
                   <div className="w-8 h-1 bg-blue-100 dark:bg-blue-900/30 rounded-full" />
+                </div>
+                <div className="glass rounded-3xl p-4 md:p-5 flex flex-col items-center justify-center text-center space-y-1 border-green-100 dark:border-green-900/30">
+                  <span className="text-[10px] font-bold uppercase text-green-500 tracking-wider">Arrived PA 🚚</span>
+                  <span className="text-3xl font-black text-gray-800 dark:text-gray-100">{arrivedItems}</span>
+                  <div className="w-8 h-1 bg-green-100 dark:bg-green-900/30 rounded-full" />
                 </div>
                 <div className="glass rounded-3xl p-4 md:p-5 flex flex-col items-center justify-center text-center space-y-2 border-pink-100 dark:border-pink-900/30 relative overflow-hidden">
                   <motion.div 
@@ -396,7 +396,7 @@ export default function Dashboard() { // Main Dashboard component
                     animate={{ width: `${arrivalProgress}%` }}
                     className="absolute inset-0 bg-pink-500/5 dark:bg-pink-500/10 pointer-events-none"
                   />
-                  <span className="text-[10px] font-bold uppercase text-pink-500 tracking-wider relative z-10">Delivery Progress</span>
+                  <span className="text-[10px] font-bold uppercase text-pink-500 tracking-wider relative z-10">Arrival Progress</span>
                   <span className="text-3xl font-black text-pink-600 dark:text-pink-400 relative z-10">{arrivalProgress}%</span>
                   <p className="text-[9px] font-bold text-gray-400 uppercase relative z-10">Complete</p>
                 </div>
