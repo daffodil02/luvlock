@@ -36,8 +36,10 @@ React can feel overwhelming, but you only need to master **three basic things** 
     *   *Goal:* Understand how modifying a State variable (like `searchTerm` in our app) automatically forces the screen to update.
 3.  **`useEffect` (Side Effects):** How React talks to the outside world.
     *   *Goal:* Learn how to use this to run code *once* when a page first loads (like how we fetched your Google Sheet data).
-4.  **Data Cleaning Patterns:** 
-    *   *Goal:* Learn how to transform messy sources (like a spreadsheet with merged cells) into clean code. This is a very valuable skill for "Real World" developers!
+### 2.5: The Search Engine Pattern (Intermediate Concept)
+One of the coolest features we built is the **Prefix-Based Search**. 
+- Using `@` or `#` to change how the search filters data is a common pattern in apps like Discord or Slack. 
+- *Goal:* See how we use `searchTerm.startsWith('#')` in `Dashboard.jsx`. This is a classic "Conditional Flow" that makes your app feel like a real tool!
 
 **Best Free Learning Resource:** [react.dev/learn](https://react.dev/learn) (The official interactive tutorial is incredible).
 
