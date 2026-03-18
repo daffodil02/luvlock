@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Delius&display=swap');
+@import "tailwindcss";
+
+/* Enable class-based dark mode in Tailwind v4 */
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  /* Change: Custom Luvlock Pink scale to match the logo's specific bubblegum magenta shade */
+  --color-pink-50: #fff1f2;
+  --color-pink-100: #ffe4e6;
+  --color-pink-200: #fecdd3;
+  --color-pink-300: #fda4af;
+  --color-pink-400: #fb7185;
+  --color-pink-500: #e9528d;
+  --color-pink-600: #c5336d;
+  --color-pink-700: #be185d;
+  --color-pink-800: #9d174d;
+  --color-pink-900: #881337;
+  --font-header: 'Baloo 2', cursive;
+  --font-body: 'Delius', cursive;
+  --animate-bounce-slow: bounce 3s linear infinite;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-pink-50);
+    color: #4a152c;
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    /* Custom vertical stripes for a premium Luvlock feel */
+    background-image: repeating-linear-gradient(
+      90deg,
+      rgba(233, 82, 141, 0.03) 0px,
+      rgba(233, 82, 141, 0.03) 40px,
+      transparent 40px,
+      transparent 80px
+    );
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Applying 'Agbalumo' to the headers, navbar, and logo text */
+  h1, h2, h3, h4, h5, h6, nav, .brand-font {
+    font-family: var(--font-header);
+    letter-spacing: 0.02em;
+    @apply uppercase tracking-tight;
+  }
+}
+
+/* --- Dark Mode Body Styles --- */
+html.dark body {
+  /* Change: Switched to a deep 'Raspberry Charcoal' (#1a0a10) to keep the pink theme alive even in dark mode */
+  background-color: #1a0a10; 
+  /* Softer light pink for text in dark mode */
+  color: var(--color-pink-100);
+  /* Change: Using subtle dark pink stripes for the pattern instead of dots */
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(233, 82, 141, 0.02) 0px,
+    rgba(233, 82, 141, 0.02) 40px,
+    transparent 40px,
+    transparent 80px
+  );
+}
+
+/* --- Glassmorphism UI Effect --- */
+.glass {
+  background-color: rgb(255 255 255 / 0.8);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 4px 20px -5px rgb(0 0 0 / 0.1);
+  border: 1px solid rgb(255 255 255 / 0.6);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- Dark Mode Glass Styles --- */
+html.dark .glass {
+  /* Change: Dark glass now has a slight pink tint to match the Raspberry background */
+  background-color: rgba(45, 20, 30, 0.9); 
+  /* Change: Border color is now based on our custom logo-pink variable */
+  border: 1px solid var(--color-pink-600); 
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.3), 0 8px 10px -6px rgb(0 0 0 / 0.3);
+}
