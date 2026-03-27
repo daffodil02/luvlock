@@ -163,7 +163,7 @@ export default function Dashboard() { // Main Dashboard component
         <div className="absolute bottom-[-10%] left-[-5%] opacity-15 text-9xl transform -rotate-12">💖</div>
         <div className="relative z-10">
           <h1 className="text-3xl font-extrabold mb-2 text-white uppercase tracking-tight font-header">Masterlist 🎀</h1>
-          <p className="text-pink-100 mb-4 font-medium max-w-sm">Your treasures are making their way to you!</p>
+          <p className="text-pink-100 font-medium text-xs uppercase tracking-wider opacity-90 mb-4">Your items are making their way to you!</p>
           <div className="flex flex-wrap items-center gap-3">
             {/* <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-[10px] font-semibold uppercase tracking-widest">
               <AlertCircle size={14} /> <span>Your treasures are making their way to you! </span>

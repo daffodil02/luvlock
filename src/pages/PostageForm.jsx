@@ -109,7 +109,7 @@ export default function PostageForm() { // Define the Postage Form page componen
         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="flex-1 glass rounded-3xl p-6 text-center space-y-4 flex flex-col justify-center border-pink-50/50 dark:border-pink-900/30">
           <div className="w-14 h-14 bg-pink-200/30 dark:bg-pink-800/30 text-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-2 shadow-sm"><Search size={28} /></div>
           <div className="space-y-1">
-            <h4 className="font-black text-gray-800 dark:text-gray-100 text-[13px] uppercase tracking-wide ">1. Search Name</h4>
+            <h4 className="font-black text-gray-700 dark:text-gray-100 text-[13px] uppercase tracking-wide ">1. Search Name</h4>
             <p className="text-[11px] text-gray-400 dark:text-gray-300 font-bold leading-tight">Check your items below!</p>
           </div>
         </motion.div>
@@ -117,7 +117,7 @@ export default function PostageForm() { // Define the Postage Form page componen
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="flex-[1.5] glass rounded-3xl p-8 text-center shadow-xl shadow-pink-200/50 dark:shadow-none relative overflow-hidden border-pink-100 dark:border-pink-900/50"> 
           <div className="w-16 h-16 bg-pink-200/30 dark:bg-pink-800/30 text-pink-500 rounded-full flex items-center justify-center mx-auto mb-6 relative z-10 scale-110 shadow-sm"><Mailbox size={32} /></div>
           <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-2 font-header uppercase tracking-tight relative z-10">Postage 📮</h2>
-          <h4 className="text-[13px] text-gray-800 dark:text-gray-100 mb-6 font-black uppercase tracking-wide">2. Submit Postage Form</h4>
+          <h4 className="text-[13px] text-gray-700 dark:text-gray-100 mb-6 font-black uppercase tracking-wide">2. Submit Postage Form</h4>
           <div className="space-y-3 relative z-10">
             <a href="https://forms.gle/4NbT1DP6ZgDahYLs6" target="_blank" rel="noopener noreferrer" className="group inline-flex items-center justify-center gap-3 w-full bg-pink-500 hover:bg-pink-600 text-white font-bold text-[12px] py-3 rounded-xl transition-all shadow-md active:scale-95 border border-pink-400/30 tracking-tight uppercase">
               <span>Fill Google Form</span><ExternalLink size={14} className="group-hover:rotate-12 transition-transform" />
@@ -131,7 +131,7 @@ export default function PostageForm() { // Define the Postage Form page componen
         <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="flex-1 glass rounded-3xl p-6 text-center space-y-4 flex flex-col justify-center border-pink-50/50 dark:border-pink-900/30">
           <div className="w-14 h-14 bg-pink-200/30 dark:bg-pink-800/30 text-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-2 shadow-sm"><Heart size={28} className="fill-pink-500 animate-pulse" /></div>
           <div className="space-y-1">
-            <h4 className="font-black text-gray-800 dark:text-gray-100 text-[13px] uppercase tracking-wide">3. Share Love</h4>
+            <h4 className="font-black text-gray-700 dark:text-gray-100 text-[13px] uppercase tracking-wide">3. Share The Love</h4>
             <p className="text-[11px] text-gray-400 dark:text-gray-300 font-bold leading-tight">Tell us about your mail!</p>
           </div>
           <a href="https://t.me/luvlock/3803" target="_blank" className="group inline-flex items-center justify-center gap-2 w-full bg-white dark:bg-pink-950/20 text-pink-500 hover:bg-pink-50 dark:hover:bg-pink-900/50 font-bold text-[11px] py-2.5 rounded-xl transition-all border border-pink-100 dark:border-pink-800/50 shadow-sm tracking-tight uppercase">
@@ -146,7 +146,7 @@ export default function PostageForm() { // Define the Postage Form page componen
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 border-b border-pink-100 dark:border-pink-900/30 pb-6 uppercase tracking-tight">
             <div>
               <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2 font-header">Postage Status</h3>
-              <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-1 font-black tracking-wide italic opacity-50">Check your items before submitting the form✨</p>
+              <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-1 font-black tracking-wide opacity-50">Check your items before submitting the form!</p>
             </div>
             <div className="relative w-full md:w-64">
               <input type="text" placeholder="Search @username..." className="w-full bg-pink-50/50 dark:bg-pink-950/20 border-2 border-pink-200 dark:border-pink-700/50 rounded-2xl py-2.5 px-4 pl-10 outline-none focus:border-pink-400 text-sm font-medium transition-all" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
