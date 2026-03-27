@@ -36,6 +36,7 @@ React can feel overwhelming, but you only need to master **three basic things** 
     *   *Goal:* Understand how modifying a State variable (like `searchTerm` in our app) automatically forces the screen to update.
 3.  **`useEffect` (Side Effects):** How React talks to the outside world.
     *   *Goal:* Learn how to use this to run code *once* when a page first loads (like how we fetched your Google Sheet data).
+
 ### 2.5: The Search Engine Pattern (Intermediate Concept)
 One of the coolest features we built is the **Prefix-Based Search**. 
 - Using `@` or `#` to change how the search filters data is a common pattern in apps like Discord or Slack. 
@@ -82,8 +83,46 @@ When `Papa.parse` and simple `useEffect` aren't enough:
 
 ---
 
+## 🌟 5️⃣ Intermediate Concepts: The SEKATA Upgrade (New!) 🕵️‍♀️🎯
+
+Welcome to the **"Masterclass"**! This project has moved into some **advanced patterns**. This section is your guide to understanding the professional logic behind the Luvlock Portal's latest features.
+
+### 🧠 Pattern A: The Forward-Filling Parser
+In your Google Sheet, you often use **Merged Cells** to look clean. However, when computers read a CSV, they see those empty rows as "Blank."
+
+**Professional Solution:**
+In `src/data.js`, we implemented a "Forward-Filling" algorithm inside the `Papa.parse` callback:
+1.  The parser iterates through every row.
+2.  It maintains a **"Memory Cache"** for `lastTag`, `lastUsername`, `lastStatus`, and `lastCode`.
+3.  If it encounters an empty cell, it automatically "Fills it in" using the memory from the previous row.
+4.  This ensures your site is 100% accurate even if the spreadsheet is formatted for humans rather than robots.
+
+### 🇰🇷 Pattern B: Regular Expressions (Regex) for Global Flags
+We implemented a **Global Flag Recognition** system using `RegExp`.
+
+**Example Pattern:** `t.match(/^([a-z]{2})\s*#?(PCO\d+)/i)`
+- It scans every Tag for country codes like `KR` or `CN`.
+- It automatically identify the country and display the flag sticker instantly on the client side with zero lag!
+
+### 🗺️ Pattern C: Dynamic UI States & Roadmap Toggle
+The "Secret Roadmap" uses a classic React pattern called **Conditional Rendering + Framer Motion**.
+
+**Logic:**
+`const [showGuide, setShowGuide] = useState(false);`
+- When you click the `Portal Guide` button, it flips the "Switch."
+- We use `<AnimatePresence>` around the roadmap to allow "Smooth Exit" animations when closing the guide.
+
+### 🧪 Pattern D: The "Visual Quiet" Principle
+To make the portal feel "Premium," we removed all visual noise.
+- **N/A Management**: Instead of showing `N/A`, we use `{row.LINK || '—'}`. A dash (`—`) is visually "quieter" and more professional than text.
+- **Color Normalization**: Every status now belongs to a specific CSS class. If a status is `CANCELLED`, it gets a specific "Sekata Red" theme. This makes the UI predictable and calm.
+
+---
+
 ## 🎓 Next Steps for You
 
 1.  **Break this app:** Go into `Dashboard.jsx`, change text, remove styling classes. Breaking code and fixing it is the best way to learn!
 2.  **Build a Todo App:** It sounds boring, but building a simple "Add Task, Delete Task" app with React will cement your knowledge of `useState`.
 3.  **Deploy this app:** Create a free account on [Netlify](https://www.netlify.com/) or [Vercel](https://vercel.com/), connect your GitHub account or manually drag-and-drop your project folder, and watch your site go live on the actual internet!
+
+**Keep exploring! You’ve built a robust, professional-grade tool!** 🦄💖 ✨ 🌸💖

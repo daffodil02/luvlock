@@ -15,38 +15,35 @@ export default function OngoingGO() { // Define the component for the 'Ongoing G
   }, []); // Empty array [] ensures this effect only runs once on mount
 
   return ( // Start of the JSX layout
-    <motion.div // Animated container for the whole page content
-      initial={{ opacity: 0, y: 10 }} // Starts faint and slightly lower
-      animate={{ opacity: 1, y: 0 }} // Fades in and slides up to its final position
-      exit={{ opacity: 0, y: -10 }} // Fades out and slides up when navigating away
-      className="space-y-6" // Adds consistent vertical spacing between children
+    <motion.div 
+      initial={{ opacity: 0, y: 10 }} 
+      animate={{ opacity: 1, y: 0 }} 
+      exit={{ opacity: 0, y: -10 }} 
+      className="space-y-6"
     >
-      {/* Page Header: A colorful banner section matched exactly with your Masterlist page! */}
+      {/* Page Header: Banner matched exactly with Dashboard! */}
       <div className="bg-pink-500 rounded-3xl p-8 text-white shadow-xl shadow-pink-200/80 dark:shadow-none relative overflow-hidden">
-        <div className="absolute top-[-10%] right-[-5%] opacity-10 text-8xl rotate-12">🛍️</div> {/* Subtle background icon */}
+        <div className="absolute top-[-10%] right-[-5%] opacity-15 text-9xl transform rotate-12">🛍️</div>
         <div className="relative z-10">
-          <h1 className="text-3xl font-bold mb-3 flex items-center gap-3">
-            Ongoing GOs <Sparkles className="fill-pink-200 text-pink-200" /> {/* Title with a sparkle icon */}
+          {/* Header Font Applied via 'font-header' in base styles */}
+          <h1 className="text-3xl font-extrabold mb-3 flex items-center gap-3">
+            Ongoing GOs ✨
           </h1>
-          <p className="text-pink-100 font-medium">Join our curated list of active group orders ✨</p> {/* Description text */}
+          <p className="text-pink-100 font-medium text-xs uppercase tracking-wider opacity-90">Check out our list of active group orders </p>
         </div>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-1"> {/* Grid layout for the order cards */}
-        {loading ? ( // Conditional Rendering Case 1: Data is still loading
+      <div className="grid gap-4 sm:grid-cols-1"> 
+        {loading ? (
            <div className="glass rounded-3xl p-16 text-center space-y-4">
-             <div className="w-10 h-10 border-4 border-pink-500 border-t-transparent rounded-full animate-spin mx-auto" /> {/* Spinner */}
-             <p className="text-gray-500 italic font-medium animate-pulse">Syncing with your spreadsheet... 🌸</p>
+             <div className="w-10 h-10 border-4 border-pink-500 border-t-transparent rounded-full animate-spin mx-auto" />
+             <p className="text-pink-400 font-black uppercase tracking-widest text-[10px] animate-pulse">Syncing Database...</p>
            </div>
-        ) : ongoingOrders.length === 0 ? ( // Conditional Rendering Case 2: No data was found
-          <div className="glass rounded-3xl p-16 text-center text-gray-500 italic">
-            No group orders are currently listed. Check back soon! ⚽
+        ) : ongoingOrders.length === 0 ? (
+          <div className="glass rounded-3xl p-16 text-center text-gray-500 dark:text-gray-400 italic">
+            No group orders are currently listed. Check back soon! 🌸
           </div>
-        ) : ongoingOrders.map((go, idx) => { // Conditional Rendering Case 3: We have data to display!
-          
-          // --- Robust Data Extraction Logic ---
-          // This helper looks for a value by trying multiple possible header names (case-insensitive)
-          // Essential because sometimes spreadsheets have slightly different column names (e.g., 'URL' vs 'Link')
+        ) : ongoingOrders.map((go, idx) => { 
           const getVal = (possibleKeys) => {
             const foundKey = Object.keys(go).find(k => 
               possibleKeys.some(pk => k.trim().toLowerCase() === pk.toLowerCase())
@@ -54,54 +51,57 @@ export default function OngoingGO() { // Define the component for the 'Ongoing G
             return foundKey ? go[foundKey] : null;
           };
 
-          // Map spreadsheet columns to our clean internal variables
           const eventType = getVal(['Online/Offline event', 'EVENT', 'TYPE']) || 'Global';
           const brandName = getVal(['Store', 'Brand', 'Seller', 'Hosted by', 'HOST']) || 'Official Store';
           const goName = getVal(['Item', 'Name of the go', 'TITLE', 'NAME']) || 'Special Collection';
           const goLink = getVal(['Link', 'Link to the group order', 'URL']) || '#';
+          const dueDate = getVal(['Due Date', 'DUE', 'DEADLINE']) || 'TBA';
 
-          return ( // Return a card for each Group Order
+          return (
             <motion.div 
-              initial={{ opacity: 0, scale: 0.98 }} // Animation start state
-              animate={{ opacity: 1, scale: 1 }} // Animation end state
-              transition={{ delay: idx * 0.1 }} // Staggered animation: each card appears slightly after the previous one
-              key={idx} // Unique key for React list rendering
-              className="glass rounded-3xl p-6 relative overflow-hidden group hover:shadow-xl hover:shadow-pink-200/20 dark:hover:shadow-none transition-all border border-pink-100/50 dark:border-pink-900/40"
+              initial={{ opacity: 0, scale: 0.98 }} 
+              animate={{ opacity: 1, scale: 1 }} 
+              transition={{ delay: idx * 0.1 }}
+              key={idx}
+              className="glass rounded-3xl p-6 relative overflow-hidden group hover:shadow-xl hover:shadow-pink-100/30 dark:hover:shadow-none transition-all border border-pink-100/50 dark:border-pink-900/40"
             >
-              <div className="flex flex-col sm:flex-row justify-between items-start gap-4">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
                 <div className="flex-1 space-y-3">
-                  <div className="flex flex-wrap items-center gap-2">
-                    {/* Badge showing if the event is Online or Offline with dynamic colors */}
-                    <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider shadow-sm ${
+                  <div className="flex flex-wrap items-center gap-3">
+                    {/* Badge: Added Dark Mode Soft-Glow variants! 🕵️‍♀️🎯 */}
+                    <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-[10px] font-black uppercase tracking-wider shadow-sm ${
                       eventType?.toLowerCase().includes('online') 
-                      ? 'bg-blue-500 text-white' 
-                      : 'bg-purple-500 text-white'
+                      ? 'bg-blue-100 text-blue-600 dark:bg-blue-900/40 dark:text-blue-300' 
+                      : 'bg-purple-100 text-purple-600 dark:bg-purple-900/40 dark:text-purple-300'
                     }`}>
                       {eventType}
                     </span>
-                    {/* Brand or Seller name with an icon */}
-                    <span className="inline-flex items-center gap-1 text-[11px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-tight">
+                    <span className="inline-flex items-center gap-1.5 text-[10px] font-black text-gray-500 dark:text-gray-200 uppercase tracking-widest leading-none">
                       <ShoppingBag size={12} className="text-pink-400" /> {brandName}
                     </span>
                   </div>
                   
                   <div>
-                    {/* Main title/item name of the Group Order */}
                     <h3 className="text-xl font-extrabold text-gray-800 dark:text-gray-100 leading-tight">
                       {goName}
                     </h3>
+                    <div className="mt-2 text-pink-500 dark:text-pink-400">
+                      <span className="inline-flex items-center gap-2 text-[10px] font-black tracking-widest bg-pink-50 dark:bg-pink-950/30 px-3 py-1.5 rounded-xl  shadow-sm border border-pink-100/50 dark:border-pink-900/30 uppercase">
+                        Deadline: {dueDate}
+                      </span>
+                    </div>
                   </div>
                 </div>
 
-                {/* Small, clean button for joining the order */}
+                {/* Primary Action Button - Standardized & Mobile Ready! */}
                 <a 
                   href={goLink} 
-                  target="_blank" // Opens the link in a new browser tab
-                  rel="noopener noreferrer" // Security best practice for external links
-                  // Change: Reduced padding (px-5 py-2.5) and roundedness (rounded-xl) to make the button feel more proportional
-                  className="w-full sm:w-auto self-stretch sm:self-center flex items-center justify-center gap-2 bg-pink-50 dark:bg-pink-900/20 text-pink-600 dark:text-pink-300 hover:bg-pink-500 dark:hover:bg-pink-600 hover:text-white dark:hover:text-white border border-pink-200 dark:border-pink-800/50 px-5 py-2.5 rounded-xl font-bold text-sm transition-all shadow-sm hover:shadow-md whitespace-nowrap"
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="group self-stretch sm:self-center w-full sm:w-auto flex items-center justify-center gap-3 bg-pink-500 hover:bg-pink-600 text-white font-bold text-[12px] py-3 rounded-xl transition-all shadow-md dark:shadow-none active:scale-95 border border-pink-400/30 tracking-tight px-8 whitespace-nowrap uppercase"
                 >
-                  Join Order <ExternalLink size={15} /> {/* Icon indicating an external link */}
+                  <span>Join Order</span> 
+                  <ExternalLink size={14} className="group-hover:rotate-12 transition-transform" /> 
                 </a>
               </div>
             </motion.div>

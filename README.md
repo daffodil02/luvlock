@@ -4,7 +4,7 @@ Welcome to the **Luvlock Masterlist & Tracking Portal**! This is a custom-built,
 
 ---
 
-## ✨ Key Features
+## ✨ Key Features (Original)
 
 - **Dual-Mode Search**: 
   - Search by **@username** to see your individual order summary and status.
@@ -14,11 +14,28 @@ Welcome to the **Luvlock Masterlist & Tracking Portal**! This is a custom-built,
 - **Real-time Data**: Syncs directly with Google Sheets for instant updates.
 - **Responsive Design**: Looks stunning on both desktop and mobile devices.
 
+## 🌟 Sekata Upgrade Phase (New Features) 🕵️‍♀️🎯
+
+- **Global Flag System 🇰🇷🇨🇳**: 
+  - Automatic Regex-based country detection in tags (e.g., `KR #PCO123` automatically displays a Korea flag sticker).
+  - Cross-platform compatibility: Stylized stickers on PC and colorful emojis on mobile.
+- **Smart-Memory Data Parser 🧠**: 
+  - Advanced forward-filling logic for Google Sheets. 
+  - It "remembers" tags, usernames, and statuses across merged cells, ensuring 100% data integrity even with complex spreadsheet formatting.
+- **Secret Roadmap Guide 🗺️**: 
+  - A toggle-able, interactive "How-to" guide on the Masterlist page.
+  - Explains the **Track → Shop → Ship** journey using custom Boutique icons (Heart, List, MapPin).
+- **Midnight Glow (Dark Mode) 🌙**: 
+  - A system-wide, responsive dark mode that adapts to your device settings or user preference, maintaining the playful "Sekata" vibe in low light.
+- **Visual Quiet & Polish ✨**: 
+  - Replaced noisy "N/A" text with sleek minimalist dashes (`—`).
+  - Standardized status badges (including the high-contrast **CANCELLED** status).
+- **Production Ready 🚀**: 
+  - Fully integrated live production Google Form links for the Postage Portal.
+
 ---
 
 ## 🏗️ Implementation Journey (Technical Breakdown)
-
-I've documented the steps we took to build this project so you can learn the structure in detail:
 
 ### 1️⃣ Step 1: Setting up the Foundation
 We used **Vite**, a modern, super-fast builder for React applications. It provides the "skeleton" of the project and handles the live-reload features while we develop.
@@ -40,34 +57,38 @@ In `Dashboard.jsx`, we use React's `useState` to track searches.
 - **The Filter Logic**: We use `.filter()` to match the `searchTerm` against either the `USERNAME` (if starting with `@`) or the `CODE` (if starting with `#`).
 - **Conditional Rendering**: The app automatically switches layouts between "User View" and "Batch View" based on the search type.
 
-### 6️⃣ Step 6: Advanced Table & Date Fallbacks
-We implemented a "Fallback" pattern for shipment dates: `{order['EST SHIPMENT'] || 'TBA 🗓️'}`. This ensures the site never looks broken if a date is missing in the sheet.
+### 6️⃣ The "Sekata Upgrade" (Technical Masterclass)
+- **Regex for Flags**: Using **Regular Expressions** to scan tags for patterns like `KR` or `CN` and automatically wrap them in a stylized flag container.
+- **The Roadmap Toggle**: Using `useState` to manage the "Secret Roadmap" state, keeping the site clean while providing help when asked.
+- **Status Color Normalization**: Refining the status badges (READY, OTW, ARRIVED, etc.) to have specific "Sekata" color themes that work perfectly in both Light and Dark modes.
 
 ---
 
 ## 🎨 Design & Branding
 
-- **Theme**: Bubblegum Pink & soft gradients (custom Luvlock palette).
+- **Theme**: Bubblegum Pink, Soft Lavender, and "Midnight Glow" Dark Mode.
 - **Typography**: 
   - **Baloo 2**: Chunky, playful headers for a "sticker/patch" feel.
   - **Delius**: Professional yet friendly handwritten font for data and body text.
 - **Visuals**: Custom Luvlock logo integration and animated background accents.
+- **Icons**: Curated **Lucide React** set (Heart, List, MapPin, ExternalLink).
 
 ---
 
-## 🛠️ Technical Stack
+## 🛠️ Technical Stack (Updated)
 
-- **React 19**: The core framework.
-- **Tailwind CSS v4**: For the modern, utility-first styling system.
+- **React 19**: Modern UI framework.
+- **Tailwind CSS v4**: Utility-first styling with custom "Sekata" color tokens.
 - **React Router 7**: Managing the transition between Masterlist, Ongoing GOs, and Postage pages.
 - **Lucide React**: Premium icon set.
-- **PapaParse**: Advanced CSV parsing to bridge Google Sheets and the website.
+- **Framer Motion**: Premium animations and roadmap transitions.
+- **PapaParse**: High-performance CSV parsing to bridge Google Sheets and the website.
 - **Vite**: High-performance build tool and dev server.
 
 ---
 
 ## ❤️ Credits & Mission
 
-Created as a personalized tracking portal to make the Group Order experience more transparent, fun, and beautiful!
+Created as a personalized tracking portal to make the Group Order experience more transparent, fun, and beautifully unified! 🦄💖 ✨ 🌸💖
 
 *(P.S. Make sure to check out `LEARN.md` in this directory for a complete guide on how this app was built from the ground up!)*

@@ -7,7 +7,9 @@ import OngoingGO from './pages/OngoingGO'; // Import the Ongoing GO (Group Order
 import PostageForm from './pages/PostageForm'; // Import the Postage Form page component
 import { fetchNotifications } from './data'; // Import the function to fetch notification data from our data file
 
-import pinkLock from './assets/pinklock.png'; // Change: Importing your new pinklock.png image asset to use as the navbar logo!
+// Change: Importing your beautiful new branding assets! 🕵️‍♀️🎯
+import luvlockLogo from './assets/luvlock_logo.png'; 
+import luvlockName from './assets/luvlock_name.png';
 
 function App() { // Define the main App component function
   const location = useLocation(); // Hook to get the current URL path (e.g., '/', '/ongoing')
@@ -17,7 +19,6 @@ function App() { // Define the main App component function
 
   useEffect(() => { // useEffect runs after the component renders to handle side effects
     // Change: Forcing the app to start in Light Mode by default for a consistent 'Pink Soccer' brand feel.
-    // We removed the code that automatically checks the visitor's computer for its dark mode setting.
     setIsDark(false); // Ensure the local state is false (Light Mode)
     document.documentElement.classList.remove('dark'); // Explicitly remove any existing dark mode CSS classes
     
@@ -37,20 +38,24 @@ function App() { // Define the main App component function
   ];
 
   return ( // JSX start: This defines what will be rendered on the screen
-    /* Change: Switched to 'max-w-3xl'—this is the 'Sweet Spot' width produced after testing! It's wider than mobile but not as huge as a full desktop app. */
+    /* Change: Switched to 'max-w-3xl'—this is the 'Sweet Spot' width produced after testing! */
     <div className="max-w-3xl mx-auto min-h-screen px-4 py-8"> {/* Main container with responsive width and padding */}
       {/* Navbar Bubble: The sticky top navigation bar */}
       <nav className="glass sticky top-4 z-50 rounded-full py-3 px-6 pb-3 shadow-lg flex justify-between items-center mb-8 border-pink-100 relative">
-        <div className="flex space-x-3 items-center text-pink-600 dark:text-pink-400 flex-shrink-0"> {/* Logo and Brand section */}
-          <motion.div // Animated wrapper for the logo
+        <div className="flex items-center text-pink-600 dark:text-pink-400 flex-shrink-0 gap-2"> {/* Branding section with a small gap */}
+          {/* Change: Bouncing effect remains ONLY on the logo icon! 🧤✨ */}
+          <motion.div 
             animate={{ y: [0, -6, 0] }} // Bouncing animation to make the logo feel alive
             transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }} // Endless loop
-            className="flex items-center justify-center flex-shrink-0" // Change: Added 'flex-shrink-0' to keep our logo from ever getting squashed
+            className="flex items-center justify-center flex-shrink-0"
           >
-             {/* Change: Set to h-10 for a balanced size that isn't too overpowering but remains perfectly visible! */}
-             <img src={pinkLock} alt="Luvlock Logo" className="h-10 w-auto object-contain" /> 
+             <img src={luvlockLogo} alt="Luvlock Logo" className="h-10 w-auto object-contain" /> 
           </motion.div>
-          <span className="font-black tracking-tighter hidden sm:inline mr-3 uppercase text-xl">Luvlock</span> {/* The brand name text */}
+          
+          {/* Change: CLEAN Branding Cleanup! Removed the stray characters beside the comment. 🕵️‍♀️🎯 */}
+          <div className="flex items-center justify-center flex-shrink-0">
+             <img src={luvlockName} alt="Luvlock" className="pl-1 h-8 w-auto object-contain" />
+          </div>
         </div>
         
         <div className="flex items-center space-x-1 sm:space-x-2"> {/* Navigation links container */}
@@ -62,8 +67,7 @@ function App() { // Define the main App component function
               <Link 
                 key={link.path} // Unique key needed for React list rendering
                 to={link.path} // Destination path for the link
-                // Dynamic class names based on whether the link is active or not
-                className={`relative px-3 py-2 rounded-full text-sm font-medium transition-colors ${isActive ? 'text-white' : 'text-gray-500 dark:text-gray-400 hover:text-pink-500 dark:hover:text-pink-300 hover:bg-pink-50 dark:hover:bg-pink-900/30'}`}
+                className={`relative px-3 py-2 rounded-full text-sm font-medium transition-colors ${isActive ? 'text-white' : 'text-gray-500 dark:text-gray-300 hover:text-pink-500 dark:hover:text-pink-300 hover:bg-pink-50 dark:hover:bg-pink-900/30'}`}
               >
                 {isActive && ( // If active, show an animated background bubble
                   <motion.div 
@@ -72,7 +76,6 @@ function App() { // Define the main App component function
                     transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }} // Springy animation effect
                   />
                 )}
-                {/* Change: Added 'whitespace-nowrap' to ensure 'Ongoing GOs' stays on one single line even on smaller screens */}
                 <span className="hidden sm:inline whitespace-nowrap">{link.name}</span> {/* Show link name on larger screens */}
                 <span className="sm:hidden"><Icon size={20} /></span> {/* Show only icon on small screens (mobile) */}
               </Link>
@@ -87,11 +90,11 @@ function App() { // Define the main App component function
             className="p-2 rounded-full text-pink-500 dark:text-pink-400 hover:bg-pink-100 dark:hover:bg-pink-900/40 transition-colors relative"
           >
             <Bell size={18} /> {/* Bell icon */}
-            {notifications.length > 0 && ( // If there are notifications, show a pulsing dot
-              <span className="absolute top-1 right-2 w-2 h-2 bg-rose-500 rounded-full animate-ping"></span>
+            {notifications.length > 0 && ( 
+              <span className="absolute top-1 right-2 w-2 h-2 bg-pink-500 rounded-full animate-ping"></span>
             )}
-            {notifications.length > 0 && ( // Static dot on top of the pulsing one
-              <span className="absolute top-1 right-2 w-2 h-2 bg-rose-500 rounded-full"></span>
+            {notifications.length > 0 && ( 
+              <span className="absolute top-1 right-2 w-2 h-2 bg-pink-500 rounded-full"></span>
             )}
           </button>
           <button // Dark mode toggle button
@@ -111,21 +114,35 @@ function App() { // Define the main App component function
               exit={{ opacity: 0, y: 10, scale: 0.95 }} // Fade out and shrink when closed
               className="absolute top-full right-0 mt-4 w-72 glass rounded-2xl shadow-xl overflow-hidden z-50 border-pink-200 dark:border-pink-900"
             >
-              <div className="bg-pink-500 text-white px-4 py-3 font-bold text-sm flex justify-between items-center">
-                <span>Notifications</span> {/* Dropdown header title */}
-                <span className="bg-white/20 px-2 py-0.5 rounded-full text-xs">{notifications.length} New</span> {/* Notification count */}
+              <div className="bg-pink-500 text-white px-4 py-3 font-bold text-sm flex justify-between items-center uppercase tracking-widest">
+                <span>Updates 🎀</span>
+                <span className="bg-white/20 px-2 py-0.5 rounded-full text-[10px]">{notifications.length} New</span>
               </div>
               <div className="max-h-64 overflow-y-auto p-2"> {/* Scrollable list of notifications */}
                 {notifications.length === 0 ? ( // Show a placeholder if no notifications
-                  <div className="p-8 text-center text-gray-500 text-sm">No notifications yet 🌸</div>
+                  <div className="p-8 text-center text-gray-500 text-sm italic">No notifications yet 🌸</div>
                 ) : ( // Map through notifications array to render each item
-                  notifications.map((notif, i) => (
-                    <div key={i} className="p-3 border-b border-pink-100 dark:border-pink-900/30 last:border-0 hover:bg-pink-50 dark:hover:bg-pink-900/20 rounded-xl transition-colors cursor-pointer">
-                      <p className="text-sm text-gray-700 dark:text-gray-300 font-bold leading-snug">{notif.title}</p> {/* Notification title */}
-                      <p className="text-sm text-gray-600 dark:text-gray-400 leading-snug mt-0.5">{notif.message}</p> {/* Notification message */}
-                      <p className="text-xs text-pink-400 mt-1 font-semibold">{notif.date}</p> {/* Notification date */}
-                    </div>
-                  ))
+                  notifications.map((notif, i) => {
+                    const getValByPossibleKeys = (possibleKeys) => {
+                      const foundKey = Object.keys(notif).find(k => 
+                        possibleKeys.some(pk => k.trim().toLowerCase() === pk.toLowerCase())
+                      );
+                      return foundKey ? notif[foundKey] : null;
+                    };
+                    const firstKeyName = Object.keys(notif)[0];
+                    const title = getValByPossibleKeys(['title', 'Notification', 'Title', 'Label', 'Type']) || firstKeyName;
+                    const message = getValByPossibleKeys(['message', 'Text', 'Message', 'Content', 'Description']) || (title !== firstKeyName ? firstKeyName : notif[firstKeyName]);
+                    const date = getValByPossibleKeys(['date', 'Time', 'Date', 'Day']);
+
+                    return (
+                      <div key={i} className="p-3 border-b border-pink-100 dark:border-pink-900/30 last:border-0 hover:bg-pink-50 dark:hover:bg-pink-900/20 rounded-xl transition-colors cursor-pointer group">
+                        <p className="text-[13px] text-gray-700 dark:text-gray-200 font-bold leading-relaxed group-hover:text-pink-500 transition-colors uppercase">
+                          {message || 'Check your dashboard for details! ✨'}
+                        </p>
+                        {date && <p className="text-[10px] text-pink-400 mt-1 font-bold tracking-tighter uppercase">{date}</p>}
+                      </div>
+                    );
+                  })
                 )}
               </div>
             </motion.div>

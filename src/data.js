@@ -4,20 +4,22 @@ import Papa from 'papaparse'; // Import PapaParse, a powerful library for parsin
 export const SHEET_URLS = {
   // Array of multiple sheet URLs for different order sections
   ORDERS: [
-    'https://docs.google.com/spreadsheets/d/e/2PACX-1vRwmHnzGnwaVVZjpQyEy1knbhKBByb34He_c5cPpOdEmuxfy2UYNtzDC6itdR6r3JACsvKulwuenc9v/pub?gid=1879667933&single=true&output=csv',
-    'https://docs.google.com/spreadsheets/d/e/2PACX-1vRwmHnzGnwaVVZjpQyEy1knbhKBByb34He_c5cPpOdEmuxfy2UYNtzDC6itdR6r3JACsvKulwuenc9v/pub?gid=1063731126&single=true&output=csv',
-    'https://docs.google.com/spreadsheets/d/e/2PACX-1vRwmHnzGnwaVVZjpQyEy1knbhKBByb34He_c5cPpOdEmuxfy2UYNtzDC6itdR6r3JACsvKulwuenc9v/pub?gid=590351889&single=true&output=csv',
-    'https://docs.google.com/spreadsheets/d/e/2PACX-1vRwmHnzGnwaVVZjpQyEy1knbhKBByb34He_c5cPpOdEmuxfy2UYNtzDC6itdR6r3JACsvKulwuenc9v/pub?gid=0&single=true&output=csv',
-    'https://docs.google.com/spreadsheets/d/e/2PACX-1vRwmHnzGnwaVVZjpQyEy1knbhKBByb34He_c5cPpOdEmuxfy2UYNtzDC6itdR6r3JACsvKulwuenc9v/pub?gid=773600509&single=true&output=csv',
-    'https://docs.google.com/spreadsheets/d/e/2PACX-1vRwmHnzGnwaVVZjpQyEy1knbhKBByb34He_c5cPpOdEmuxfy2UYNtzDC6itdR6r3JACsvKulwuenc9v/pub?gid=955840033&single=true&output=csv',
-    'https://docs.google.com/spreadsheets/d/e/2PACX-1vRwmHnzGnwaVVZjpQyEy1knbhKBByb34He_c5cPpOdEmuxfy2UYNtzDC6itdR6r3JACsvKulwuenc9v/pub?gid=1079608460&single=true&output=csv',
-    'https://docs.google.com/spreadsheets/d/e/2PACX-1vRwmHnzGnwaVVZjpQyEy1knbhKBByb34He_c5cPpOdEmuxfy2UYNtzDC6itdR6r3JACsvKulwuenc9v/pub?gid=143044074&single=true&output=csv',
-    'https://docs.google.com/spreadsheets/d/e/2PACX-1vRwmHnzGnwaVVZjpQyEy1knbhKBByb34He_c5cPpOdEmuxfy2UYNtzDC6itdR6r3JACsvKulwuenc9v/pub?gid=803254890&single=true&output=csv',
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vT4OSHMIPTCNOrFqk4knCD1KLCIT9mJQS5NFYoMKZGP23bDcZPModyVzXmFkF0soMqwH4oyGbNKmo8d/pub?gid=258204747&single=true&output=csv',
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vT4OSHMIPTCNOrFqk4knCD1KLCIT9mJQS5NFYoMKZGP23bDcZPModyVzXmFkF0soMqwH4oyGbNKmo8d/pub?gid=577837462&single=true&output=csv',
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vT4OSHMIPTCNOrFqk4knCD1KLCIT9mJQS5NFYoMKZGP23bDcZPModyVzXmFkF0soMqwH4oyGbNKmo8d/pub?gid=2019147234&single=true&output=csv',
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vT4OSHMIPTCNOrFqk4knCD1KLCIT9mJQS5NFYoMKZGP23bDcZPModyVzXmFkF0soMqwH4oyGbNKmo8d/pub?gid=1242867494&single=true&output=csv',
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vT4OSHMIPTCNOrFqk4knCD1KLCIT9mJQS5NFYoMKZGP23bDcZPModyVzXmFkF0soMqwH4oyGbNKmo8d/pub?gid=1798317038&single=true&output=csv',
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vT4OSHMIPTCNOrFqk4knCD1KLCIT9mJQS5NFYoMKZGP23bDcZPModyVzXmFkF0soMqwH4oyGbNKmo8d/pub?gid=1795245801&single=true&output=csv',
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vT4OSHMIPTCNOrFqk4knCD1KLCIT9mJQS5NFYoMKZGP23bDcZPModyVzXmFkF0soMqwH4oyGbNKmo8d/pub?gid=76895146&single=true&output=csv',
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vT4OSHMIPTCNOrFqk4knCD1KLCIT9mJQS5NFYoMKZGP23bDcZPModyVzXmFkF0soMqwH4oyGbNKmo8d/pub?gid=1233109253&single=true&output=csv',
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vT4OSHMIPTCNOrFqk4knCD1KLCIT9mJQS5NFYoMKZGP23bDcZPModyVzXmFkF0soMqwH4oyGbNKmo8d/pub?gid=1292474102&single=true&output=csv',
   ],
   // Single URL for notification data
-  NOTIFICATIONS: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRwmHnzGnwaVVZjpQyEy1knbhKBByb34He_c5cPpOdEmuxfy2UYNtzDC6itdR6r3JACsvKulwuenc9v/pub?gid=4109000&single=true&output=csv',
+  NOTIFICATIONS: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT4OSHMIPTCNOrFqk4knCD1KLCIT9mJQS5NFYoMKZGP23bDcZPModyVzXmFkF0soMqwH4oyGbNKmo8d/pub?gid=808130399&single=true&output=csv',
   // Single URL for ongoing Group Order data
-  GO_ORDERS: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRwmHnzGnwaVVZjpQyEy1knbhKBByb34He_c5cPpOdEmuxfy2UYNtzDC6itdR6r3JACsvKulwuenc9v/pub?gid=637330377&single=true&output=csv'
+  GO_ORDERS: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT4OSHMIPTCNOrFqk4knCD1KLCIT9mJQS5NFYoMKZGP23bDcZPModyVzXmFkF0soMqwH4oyGbNKmo8d/pub?gid=2002772106&single=true&output=csv',
+  // Single URL for postage data
+  POSTAGE: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT4OSHMIPTCNOrFqk4knCD1KLCIT9mJQS5NFYoMKZGP23bDcZPModyVzXmFkF0soMqwH4oyGbNKmo8d/pub?gid=1917428449&single=true&output=csv',
 };
 
 // --- Specialized Parser for Order Tracking (Handles complex layouts like merged cells and headings) ---
@@ -41,6 +43,9 @@ export const fetchOrdersData = (url, mockFallback) => {
         let currentHeaders = null; // Stores the column headers (e.g., USERNAME, STATUS)
         let lastUsername = ''; // Used for "forward filling" usernames in merged rows
         let lastTag = '';      // Used for "forward filling" tags (e.g. #XY11) if it's a column
+        let lastCode = '';     // Used for "forward filling" area codes (e.g. CN07)
+        let lastStatus = '';   // Used for "forward filling" status (e.g. READY FOR POSTAGE)
+        let lastRemarks = '';  // Used for "forward filling" remarks
 
         rows.forEach((row) => {
           const rowText = row.join(' ');
@@ -50,7 +55,6 @@ export const fetchOrdersData = (url, mockFallback) => {
           const nonEmojiCells = row.filter(cell => (cell + '').trim().length > 0).length;
 
           // 1. Detect Block Section Header (e.g. #DAYBREAK4)
-          // Look for a cell starting with '#' but ONLY if the row is mostly empty (Block Architecture)
           const potentialCode = row.find(cell => (cell + '').trim().startsWith('#'));
           if (potentialCode && nonEmojiCells < 3 && !row.some(cell => (cell+'').toUpperCase().includes('USERNAME'))) {
             currentSectionCode = (potentialCode + '').split('(')[0].trim();
@@ -85,17 +89,37 @@ export const fetchOrdersData = (url, mockFallback) => {
                 const cellUrl = val.match(/https?:\/\/[^\s,]+/);
                 if (cellUrl) order.CELL_LINK = cellUrl[0];
 
-                // Logic for "Column-based" Tags (e.g. #XY11 in the first column)
-                // This handles tables where the order code is a column that might be merged.
+                // Logic for "Column-based" Data
+                // This handles complex merged tables (Cluster layouts)
+                if (header === 'CODE' || header === 'AREA') {
+                  if (val) lastCode = val; 
+                  else if (!val) val = lastCode; // Forward fill Code
+                  order.CODE = val; 
+                }
+
                 if (header === 'TAG' || header === 'BATCH') {
-                  if (val && val.startsWith('#')) lastTag = val; // Remember the new tag
-                  else if (!val) val = lastTag; // Forward fill if merged
-                  order.CODE = val; // Override the order code with the specific row tag
+                  // Change: Recognize #PCO tags even if they start with country codes (KR, CN, etc.) 🕵️‍♀️🎯
+                  if (val && (val.startsWith('#') || val.toUpperCase().includes('GIVEAWAY') || val.toUpperCase().includes('#PCO'))) {
+                    lastTag = val; 
+                  } else if (!val) {
+                    val = lastTag; // Forward fill the tag if the cell is truly empty (merged row logic)
+                  }
+                  order.TAG = val; 
                 }
 
                 if (header === 'USERNAME') {
                   if (val) lastUsername = val;
                   else val = lastUsername; // Forward fill username
+                }
+
+                if (header === 'STATUS') {
+                  if (val) lastStatus = val;
+                  else val = lastStatus; // Forward fill Status (Fix for merged Ready/Paid cells!)
+                }
+
+                if (header === 'REMARKS' || header === 'NOTE') {
+                  if (val) lastRemarks = val;
+                  else val = lastRemarks; // Forward fill Remarks
                 }
                 
                 if (header) order[header] = val;
@@ -116,7 +140,7 @@ export const fetchOrdersData = (url, mockFallback) => {
   });
 };
 
-// --- Standard Parser for Notifications and GOs (Used for simple tables with standard headers) ---
+// --- Standard Parser for Notifications (Used for simple tables with standard headers) ---
 export const fetchStandardData = (url, mockFallback) => {
   return new Promise((resolve) => {
     // Basic verification of the provided URL
@@ -152,3 +176,7 @@ export const fetchNotifications = () => fetchStandardData(SHEET_URLS.NOTIFICATIO
 
 // Helper function to fetch ongoing Group Orders
 export const fetchOngoingGOs = () => fetchStandardData(SHEET_URLS.GO_ORDERS, []);
+
+// Helper function to fetch postage table data
+// Change: Switched to fetchOrdersData because the Postage sheet uses the same complex merged layout as the Masterlist!
+export const fetchPostage = () => fetchOrdersData(SHEET_URLS.POSTAGE, []);
