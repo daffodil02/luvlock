@@ -39,26 +39,26 @@ function App() { // Define the main App component function
 
   return ( // JSX start: This defines what will be rendered on the screen
     /* Change: Switched to 'max-w-3xl'—this is the 'Sweet Spot' width produced after testing! */
-    <div className="max-w-3xl mx-auto min-h-screen px-4 py-8"> {/* Main container with responsive width and padding */}
+    <div className="max-w-3xl mx-auto min-h-screen px-2 sm:px-4 py-8 w-full overflow-x-hidden sm:overflow-x-visible"> {/* Responsive padding and max-width */}
       {/* Navbar Bubble: The sticky top navigation bar */}
-      <nav className="glass sticky top-4 z-50 rounded-full py-3 px-6 pb-3 shadow-lg flex justify-between items-center mb-8 border-pink-100 relative">
-        <div className="flex items-center text-pink-600 dark:text-pink-400 flex-shrink-0 gap-2"> {/* Branding section with a small gap */}
+      <nav className="glass sticky top-2 sm:top-4 z-50 rounded-full py-3 px-3 sm:py-3 sm:px-6 shadow-lg flex justify-between items-center mb-8 border-pink-100 relative">
+        <div className="flex items-center text-pink-600 dark:text-pink-400 flex-shrink-0 gap-1 sm:gap-2"> {/* Branding section with a small gap */}
           {/* Change: Bouncing effect remains ONLY on the logo icon! 🧤✨ */}
           <motion.div 
             animate={{ y: [0, -6, 0] }} // Bouncing animation to make the logo feel alive
             transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }} // Endless loop
             className="flex items-center justify-center flex-shrink-0"
           >
-             <img src={luvlockLogo} alt="Luvlock Logo" className="h-10 w-auto object-contain" /> 
+             <img src={luvlockLogo} alt="Luvlock Logo" className="h-8 sm:h-10 w-auto object-contain" /> 
           </motion.div>
           
           {/* Change: CLEAN Branding Cleanup! Removed the stray characters beside the comment. 🕵️‍♀️🎯 */}
           <div className="flex items-center justify-center flex-shrink-0">
-             <img src={luvlockName} alt="Luvlock" className="pl-1 h-8 w-auto object-contain" />
+             <img src={luvlockName} alt="Luvlock" className="pl-0.5 sm:pl-1 h-6 sm:h-8 w-auto object-contain" />
           </div>
         </div>
         
-        <div className="flex items-center space-x-1 sm:space-x-2"> {/* Navigation links container */}
+        <div className="flex items-center gap-2 sm:gap-2"> {/* Navigation links container */}
           {navLinks.map((link) => { // Map through our navLinks array to create Link elements
             const Icon = link.icon; // Get the icon component for this link
             const isActive = location.pathname === link.path; // Check if this link matches the current URL path
@@ -67,7 +67,7 @@ function App() { // Define the main App component function
               <Link 
                 key={link.path} // Unique key needed for React list rendering
                 to={link.path} // Destination path for the link
-                className={`relative px-3 py-2 rounded-full text-sm font-medium transition-colors ${isActive ? 'text-white' : 'text-gray-500 dark:text-gray-300 hover:text-pink-500 dark:hover:text-pink-300 hover:bg-pink-50 dark:hover:bg-pink-900/30'}`}
+                className={`relative px-3 sm:px-3 py-2 sm:py-2 rounded-full text-sm font-medium transition-colors ${isActive ? 'text-white' : 'text-gray-500 dark:text-gray-300 hover:text-pink-500 dark:hover:text-pink-300 hover:bg-pink-50 dark:hover:bg-pink-900/30'}`}
               >
                 {isActive && ( // If active, show an animated background bubble
                   <motion.div 
@@ -77,31 +77,31 @@ function App() { // Define the main App component function
                   />
                 )}
                 <span className="hidden sm:inline whitespace-nowrap">{link.name}</span> {/* Show link name on larger screens */}
-                <span className="sm:hidden"><Icon size={20} /></span> {/* Show only icon on small screens (mobile) */}
+                <span className="sm:hidden"><Icon size={18} className="sm:w-5 sm:h-5" /></span> {/* Show slightly larger icon on mobile */}
               </Link>
             )
           })}
         </div>
 
         {/* Action Icons: Notifications and Dark Mode toggle */}
-        <div className="flex items-center space-x-2 border-l border-pink-200 dark:border-pink-900/50 pl-2 ml-2">
+        <div className="flex items-center gap-1 sm:gap-2 border-l border-pink-200 dark:border-pink-900/50 pl-2 sm:pl-2 ml-1 sm:ml-2">
           <button // Notification toggle button
             onClick={() => setShowNotifications(!showNotifications)} // Toggle the dropdown visibility
-            className="p-2 rounded-full text-pink-500 dark:text-pink-400 hover:bg-pink-100 dark:hover:bg-pink-900/40 transition-colors relative"
+            className="p-1.5 sm:p-2 rounded-full text-pink-500 dark:text-pink-400 hover:bg-pink-100 dark:hover:bg-pink-900/40 transition-colors relative"
           >
-            <Bell size={18} /> {/* Bell icon */}
+            <Bell size={18} className="sm:w-[18px] sm:h-[18px]" /> {/* Bell icon */}
             {notifications.length > 0 && ( 
-              <span className="absolute top-1 right-2 w-2 h-2 bg-pink-500 rounded-full animate-ping"></span>
+              <span className="absolute top-1 sm:top-1 right-1.5 sm:right-2 w-1.5 sm:w-2 h-1.5 sm:h-2 bg-pink-500 rounded-full animate-ping"></span>
             )}
             {notifications.length > 0 && ( 
-              <span className="absolute top-1 right-2 w-2 h-2 bg-pink-500 rounded-full"></span>
+              <span className="absolute top-1 sm:top-1 right-1.5 sm:right-2 w-1.5 sm:w-2 h-1.5 sm:h-2 bg-pink-500 rounded-full"></span>
             )}
           </button>
           <button // Dark mode toggle button
             onClick={toggleDarkMode} // Call the toggleDarkMode function on click
-            className="p-2 rounded-full text-pink-500 dark:text-pink-400 hover:bg-pink-100 dark:hover:bg-pink-900/40 transition-colors"
+            className="p-1.5 sm:p-2 rounded-full text-pink-500 dark:text-pink-400 hover:bg-pink-100 dark:hover:bg-pink-900/40 transition-colors"
           >
-            {isDark ? <Sun size={18} /> : <Moon size={18} />} {/* Switch between Sun and Moon icons */}
+            {isDark ? <Sun size={18} className="sm:w-[18px] sm:h-[18px]" /> : <Moon size={18} className="sm:w-[18px] sm:h-[18px]" />} {/* Switch between Sun and Moon icons */}
           </button>
         </div>
 

@@ -144,8 +144,8 @@ export default function PostageForm() { // Define the Postage Form page componen
       <div className="glass rounded-3xl shadow-xl shadow-pink-100/50 dark:shadow-none flex flex-col overflow-hidden border border-pink-100 dark:border-pink-900/30">
         <div className="p-4 md:p-5 space-y-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 border-b border-pink-100 dark:border-pink-900/30 pb-6 uppercase tracking-tight">
-            <div>
-              <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2 font-header">Postage Status</h3>
+            <div className="text-center md:text-left w-full md:w-auto">
+              <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200 flex justify-center md:justify-start items-center gap-2 font-header">Postage Status</h3>
               <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-1 font-black tracking-wide opacity-50">Check your items before submitting the form!</p>
             </div>
             <div className="relative w-full md:w-64">

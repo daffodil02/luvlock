@@ -354,7 +354,7 @@ export default function Dashboard() { // Main Dashboard component
         <div className="flex items-center justify-between px-2">
           <h3 className="font-bold text-gray-700 dark:text-gray-300 flex items-center gap-2 uppercase tracking-tight text-sm">
             <Box size={18} className="text-pink-500" />
-            {searchTerm ? 'Search Results' : 'Welcome to the Masterlist 🎀'}
+            {searchTerm ? 'Search Results' : 'Welcome to the Masterlist!'}
           </h3>
           {searchTerm && (
             <span className="text-[10px] font-bold text-pink-400 dark:text-pink-500 uppercase tracking-widest">
