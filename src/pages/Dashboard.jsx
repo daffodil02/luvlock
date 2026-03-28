@@ -122,7 +122,10 @@ export default function Dashboard() { // Main Dashboard component
     // 4. OTW Logic - Pink
     if (s.includes('otw')) return 'bg-pink-100 text-pink-700 dark:bg-pink-900/40 dark:text-pink-300 border-pink-100 dark:border-pink-800';
     
-    // 5. CANCELLED - Red Alert! 
+    // 5. COMPLETED - Custom Green
+    if (s.includes('completed')) return 'bg-green-500 text-white shadow-sm shadow-green-200 dark:shadow-none';
+
+    // 6. CANCELLED - Red Alert! 
     if (s.includes('cancelled')) return 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300 border-red-200 dark:border-red-800';
 
     return 'bg-gray-100 text-gray-400 dark:bg-gray-800 dark:text-gray-500 border-gray-200 dark:border-gray-700';
@@ -253,36 +256,38 @@ export default function Dashboard() { // Main Dashboard component
           )}
         </div>
 
-        <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="pt-4 border-t border-pink-100 dark:border-pink-900/30 flex flex-wrap gap-3">
-          <div className="flex-1 min-w-[140px] space-y-1.5">
-            <label className="text-[10px] font-bold uppercase text-pink-400 ml-1">Status</label>
-            <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="w-full bg-white dark:bg-pink-950/20 border border-pink-200 dark:border-pink-700/50 rounded-xl px-3 py-2 text-sm text-gray-700 dark:text-gray-300 outline-none focus:border-pink-400">
-              <option value="all">All Statuses</option>
-              {uniqueStatuses.map(s => <option key={s} value={s}>{toTitleCase(s)}</option>)}
-            </select>
-          </div>
-          <div className="flex-1 min-w-[140px] space-y-1.5">
-            <label className="text-[10px] font-bold uppercase text-pink-400 ml-1">Batch / GO</label>
-            <select value={codeFilter} onChange={(e) => setCodeFilter(e.target.value)} className="w-full bg-white dark:bg-pink-950/20 border border-pink-200 dark:border-pink-700/50 rounded-xl px-3 py-2 text-sm text-gray-700 dark:text-gray-300 outline-none focus:border-pink-400">
-              <option value="all">All Batches</option>
-              {uniqueCodes.map(c => <option key={c} value={c}>{c}</option>)}
-            </select>
-          </div>
-          <div className="flex-1 min-w-[140px] space-y-1.5">
-            <label className="text-[10px] font-bold uppercase text-pink-400 ml-1">Payment</label>
-            <select value={paymentFilter} onChange={(e) => setPaymentFilter(e.target.value)} className="w-full bg-white dark:bg-pink-950/20 border border-pink-200 dark:border-pink-700/50 rounded-xl px-3 py-2 text-sm text-gray-700 dark:text-gray-300 outline-none focus:border-pink-400">
-              <option value="all">Any Payment</option>
-              <option value="paid">Fully Paid</option>
-              <option value="unpaid">Has Unpaid</option>
-            </select>
-          </div>
-          <button onClick={resetFilters} className="self-end px-4 py-2 text-xs font-bold text-pink-500 hover:text-pink-600 transition-colors uppercase">Reset All</button>
-        </motion.div>
+        {searchTerm && (
+          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="pt-4 border-t border-pink-100 dark:border-pink-900/30 flex flex-wrap gap-3">
+            <div className="flex-1 min-w-[140px] space-y-1.5">
+              <label className="text-[10px] font-bold uppercase text-pink-400 ml-1">Status</label>
+              <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="w-full bg-white dark:bg-pink-950/20 border border-pink-200 dark:border-pink-700/50 rounded-xl px-3 py-2 text-sm text-gray-700 dark:text-gray-300 outline-none focus:border-pink-400">
+                <option value="all">All Statuses</option>
+                {uniqueStatuses.map(s => <option key={s} value={s}>{toTitleCase(s)}</option>)}
+              </select>
+            </div>
+            <div className="flex-1 min-w-[140px] space-y-1.5">
+              <label className="text-[10px] font-bold uppercase text-pink-400 ml-1">Batch / GO</label>
+              <select value={codeFilter} onChange={(e) => setCodeFilter(e.target.value)} className="w-full bg-white dark:bg-pink-950/20 border border-pink-200 dark:border-pink-700/50 rounded-xl px-3 py-2 text-sm text-gray-700 dark:text-gray-300 outline-none focus:border-pink-400">
+                <option value="all">All Batches</option>
+                {uniqueCodes.map(c => <option key={c} value={c}>{c}</option>)}
+              </select>
+            </div>
+            <div className="flex-1 min-w-[140px] space-y-1.5">
+              <label className="text-[10px] font-bold uppercase text-pink-400 ml-1">Payment</label>
+              <select value={paymentFilter} onChange={(e) => setPaymentFilter(e.target.value)} className="w-full bg-white dark:bg-pink-950/20 border border-pink-200 dark:border-pink-700/50 rounded-xl px-3 py-2 text-sm text-gray-700 dark:text-gray-300 outline-none focus:border-pink-400">
+                <option value="all">Any Payment</option>
+                <option value="paid">Fully Paid</option>
+                <option value="unpaid">Has Unpaid</option>
+              </select>
+            </div>
+            <button onClick={resetFilters} className="self-end px-4 py-2 text-xs font-bold text-pink-500 hover:text-pink-600 transition-colors uppercase">Reset All</button>
+          </motion.div>
+        )}
       </div>
 
       {/* Summary Section */}
       <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
-        {isBatchMode ? (
+        {!searchTerm ? null : isBatchMode ? (
           <>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
               <div className="glass rounded-3xl p-5 flex flex-col items-center justify-center text-center space-y-1 border-pink-100 dark:border-pink-900/30">
@@ -349,15 +354,23 @@ export default function Dashboard() { // Main Dashboard component
         <div className="flex items-center justify-between px-2">
           <h3 className="font-bold text-gray-700 dark:text-gray-300 flex items-center gap-2 uppercase tracking-tight text-sm">
             <Box size={18} className="text-pink-500" />
-            {searchTerm ? 'Search Results' : 'Full Masterlist'}
+            {searchTerm ? 'Search Results' : 'Welcome to the Masterlist 🎀'}
           </h3>
-          <span className="text-[10px] font-bold text-pink-400 dark:text-pink-500 uppercase tracking-widest">
-            Showing {indexOfFirstItem + 1}-{Math.min(indexOfLastItem, displayedOrders.length)} of {displayedOrders.length}
-          </span>
+          {searchTerm && (
+            <span className="text-[10px] font-bold text-pink-400 dark:text-pink-500 uppercase tracking-widest">
+              Showing {indexOfFirstItem + 1}-{Math.min(indexOfLastItem, displayedOrders.length)} of {displayedOrders.length}
+            </span>
+          )}
         </div>
         
         {isLoading ? (
           <div className="glass rounded-3xl p-12 flex flex-col items-center justify-center text-pink-400/50 dark:text-pink-400/30 animate-pulse"><Loader2 className="animate-spin mb-4" size={32} /><p className="font-black uppercase tracking-widest text-[10px]">Syncing Database...</p></div>
+        ) : !searchTerm ? (
+          <div className="glass rounded-3xl p-12 flex flex-col items-center justify-center text-center border-dashed border-pink-200 dark:border-pink-900/30 bg-pink-50/20 dark:bg-pink-900/5 h-64 gap-3">
+             <Search size={36} className="text-pink-400/60 dark:text-pink-400/30 mb-2" />
+             <h3 className="text-lg font-black uppercase tracking-widest text-pink-500 dark:text-pink-400">Search to View Orders</h3>
+             <p className="font-bold text-[11px] uppercase tracking-wider text-gray-400 dark:text-gray-500">Type your @username or #tag above to reveal your items! ✨</p>
+          </div>
         ) : displayedOrders.length === 0 ? (
           <div className="glass rounded-3xl p-10 flex flex-col items-center text-center text-gray-500 border-dashed border-pink-200 dark:border-pink-900/50"><SearchX size={32} className="text-pink-300 mb-4 opacity-50" /><p className="italic text-sm">No items match your search ✨</p></div>
         ) : (
@@ -368,7 +381,7 @@ export default function Dashboard() { // Main Dashboard component
                   <thead>
                     <tr className="bg-pink-500 text-white text-[10px] uppercase font-black tracking-widest leading-none">
                       <th className="px-5 py-5 rounded-tl-2xl whitespace-nowrap">Tag</th>
-                      {(isBatchMode || !searchTerm) && <th className="px-5 py-5 whitespace-nowrap">User</th>}
+                      <th className="px-5 py-5 whitespace-nowrap">User</th>
                       <th className="px-5 py-5 whitespace-nowrap">Specification</th>
                       <th className="px-5 py-5 text-center whitespace-nowrap">Qtt</th>
                       <th className="px-4 py-5 text-center whitespace-nowrap">1st</th>
@@ -391,9 +404,7 @@ export default function Dashboard() { // Main Dashboard component
                                {formatTagWithFlag(order.TAG || order.CODE)}
                             </span>
                           </td>
-                          {(isBatchMode || !searchTerm) && (
-                            <td className="px-4 py-4 whitespace-nowrap font-bold text-gray-700 dark:text-gray-200">{order.USERNAME?.startsWith('@') ? order.USERNAME : `@${order.USERNAME}`}</td>
-                          )}
+                          <td className="px-4 py-4 whitespace-nowrap font-bold text-gray-700 dark:text-gray-200">{order.USERNAME?.startsWith('@') ? order.USERNAME : `@${order.USERNAME}`}</td>
                           <td className="px-4 py-4"><p className="text-gray-800 dark:text-gray-200 font-medium leading-tight">{toTitleCase(order.SPECIFICATION) || '—'}</p></td>
                           <td className="px-4 py-4 text-center font-bold text-gray-500 dark:text-gray-400">{order.QTT || '1'}</td>
                           <td className="px-3 py-4 text-center"><PaymentStatus status={order['1ST']} /></td>
