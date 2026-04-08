@@ -128,18 +128,29 @@ export default function Dashboard() { // Main Dashboard component
     // 6. CANCELLED - Red Alert! 
     if (s.includes('cancelled')) return 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300 border-red-200 dark:border-red-800';
 
+    // 7. BILLED EMS - Orange
+    if (s.includes('billed ems')) return 'bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-300 border-orange-200 dark:border-orange-800';
+
     return 'bg-gray-100 text-gray-400 dark:bg-gray-800 dark:text-gray-500 border-gray-200 dark:border-gray-700';
   };
 
-  const totalItems = searchResults.reduce((sum, o) => sum + parseInt(o.QTT || 1), 0);
+  const totalItems = searchResults.reduce((sum, o) => {
+    const qtt = parseInt(o.QTT);
+    return sum + (isNaN(qtt) ? 1 : qtt);
+  }, 0);
+  
   const arrivedItems = searchResults.filter(o => {
     const s = o.STATUS?.toLowerCase() || '';
     return s.includes('arrived pa') || s.includes('ready') || s.includes('shipped');
-  }).reduce((sum, o) => sum + parseInt(o.QTT || 1), 0);
+  }).reduce((sum, o) => {
+    const qtt = parseInt(o.QTT);
+    return sum + (isNaN(qtt) ? 1 : qtt);
+  }, 0);
   
   const arrivalProgress = totalItems > 0 ? Math.round((arrivedItems / totalItems) * 100) : 0;
   const otwItems = totalItems - arrivedItems;
   const isBatchMode = searchTerm.trim().startsWith('#') && searchResults.length < orders.length;
+  const isSearched = searchResults !== orders;
 
   const getSmartDate = (obj, keyword) => {
     if (!obj) return '-';
@@ -256,7 +267,7 @@ export default function Dashboard() { // Main Dashboard component
           )}
         </div>
 
-        {searchTerm && (
+        {(searchTerm && isSearched) && (
           <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="pt-4 border-t border-pink-100 dark:border-pink-900/30 flex flex-wrap gap-3">
             <div className="flex-1 min-w-[140px] space-y-1.5">
               <label className="text-[10px] font-bold uppercase text-pink-400 ml-1">Status</label>
@@ -287,7 +298,7 @@ export default function Dashboard() { // Main Dashboard component
 
       {/* Summary Section */}
       <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
-        {!searchTerm ? null : isBatchMode ? (
+        {(!searchTerm || !isSearched) ? null : isBatchMode ? (
           <>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
               <div className="glass rounded-3xl p-5 flex flex-col items-center justify-center text-center space-y-1 border-pink-100 dark:border-pink-900/30">
@@ -354,9 +365,9 @@ export default function Dashboard() { // Main Dashboard component
         <div className="flex items-center justify-between px-2">
           <h3 className="font-bold text-gray-700 dark:text-gray-300 flex items-center gap-2 uppercase tracking-tight text-sm">
             <Box size={18} className="text-pink-500" />
-            {searchTerm ? 'Search Results' : 'Welcome to the Masterlist!'}
+            {(searchTerm && isSearched) ? 'Search Results' : 'Welcome to the Masterlist!'}
           </h3>
-          {searchTerm && (
+          {(searchTerm && isSearched) && (
             <span className="text-[10px] font-bold text-pink-400 dark:text-pink-500 uppercase tracking-widest">
               Showing {indexOfFirstItem + 1}-{Math.min(indexOfLastItem, displayedOrders.length)} of {displayedOrders.length}
             </span>
@@ -365,7 +376,7 @@ export default function Dashboard() { // Main Dashboard component
         
         {isLoading ? (
           <div className="glass rounded-3xl p-12 flex flex-col items-center justify-center text-pink-400/50 dark:text-pink-400/30 animate-pulse"><Loader2 className="animate-spin mb-4" size={32} /><p className="font-black uppercase tracking-widest text-[10px]">Syncing Database...</p></div>
-        ) : !searchTerm ? (
+        ) : (!searchTerm || !isSearched) ? (
           <div className="glass rounded-3xl p-12 flex flex-col items-center justify-center text-center border-dashed border-pink-200 dark:border-pink-900/30 bg-pink-50/20 dark:bg-pink-900/5 h-64 gap-3">
              <Search size={36} className="text-pink-400/60 dark:text-pink-400/30 mb-2" />
              <h3 className="text-lg font-black uppercase tracking-widest text-pink-500 dark:text-pink-400">Search to View Orders</h3>
