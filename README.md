@@ -32,6 +32,10 @@ Welcome to the **Luvlock Masterlist & Tracking Portal**! This is a custom-built,
   - Standardized status badges (including the high-contrast **CANCELLED** status).
 - **Production Ready 🚀**: 
   - Fully integrated live production Google Form links for the Postage Portal.
+- **Global Magic Calculator 🪄**: 
+  - A persistent, floating multi-currency price converter available on every page.
+  - Supports KRW, JPY, YUAN, BAHT, USD, and SGD with real-time exchange rates fetched directly from Google Sheets.
+  - Features a premium glassmorphic popup with automatic conversion to MYR.
 
 ---
 
