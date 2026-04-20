@@ -19,7 +19,10 @@ export const SHEET_URLS = {
   // Single URL for ongoing Group Order data
   GO_ORDERS: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT4OSHMIPTCNOrFqk4knCD1KLCIT9mJQS5NFYoMKZGP23bDcZPModyVzXmFkF0soMqwH4oyGbNKmo8d/pub?gid=2002772106&single=true&output=csv',
   // Single URL for postage data
+  // Change: Switched to fetchOrdersData because the Postage sheet uses the same complex merged layout as the Masterlist!
   POSTAGE: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT4OSHMIPTCNOrFqk4knCD1KLCIT9mJQS5NFYoMKZGP23bDcZPModyVzXmFkF0soMqwH4oyGbNKmo8d/pub?gid=1917428449&single=true&output=csv',
+  // Change: Added dynamic rate sheet for calculator! 🕵️‍♀️🎯
+  CALCULATOR_RATE: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT4OSHMIPTCNOrFqk4knCD1KLCIT9mJQS5NFYoMKZGP23bDcZPModyVzXmFkF0soMqwH4oyGbNKmo8d/pub?gid=1188104745&single=true&output=csv',
 };
 
 // --- Specialized Parser for Order Tracking (Handles complex layouts like merged cells and headings) ---
@@ -180,3 +183,10 @@ export const fetchOngoingGOs = () => fetchStandardData(SHEET_URLS.GO_ORDERS, [])
 // Helper function to fetch postage table data
 // Change: Switched to fetchOrdersData because the Postage sheet uses the same complex merged layout as the Masterlist!
 export const fetchPostage = () => fetchOrdersData(SHEET_URLS.POSTAGE, []);
+
+// Helper function to fetch the exchange rates list for the calculator! 🕵️‍♀️🎯
+export const fetchExchangeRates = async () => {
+  const data = await fetchStandardData(SHEET_URLS.CALCULATOR_RATE, []);
+  // Returns [{ Currency: 'KRW', Rate: '0.0028' }, ...]
+  return data;
+};

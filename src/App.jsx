@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard'; // Import the Dashboard page componen
 import OngoingGO from './pages/OngoingGO'; // Import the Ongoing GO (Group Orders) page component
 import PostageForm from './pages/PostageForm'; // Import the Postage Form page component
 import { fetchNotifications } from './data'; // Import the function to fetch notification data from our data file
+import PriceCalculator from './PriceCalculator'; // Change: Importing the global Calculator component! 🕵️‍♀️🎯
 
 // Change: Importing your beautiful new branding assets! 🕵️‍♀️🎯
 import luvlockLogo from './assets/luvlock_logo.png'; 
@@ -163,6 +164,9 @@ function App() { // Define the main App component function
       <footer className="mt-16 text-center text-sm text-pink-400 dark:text-pink-600 font-medium opacity-80 pb-8 flex flex-col items-center gap-2">
         <div>🌸 Built with love from luvlock</div> {/* Footer text */}
       </footer>
+
+      {/* Global Price Calculator 🕵️‍♀️🎯 */}
+      <PriceCalculator />
     </div>
   );
 }
