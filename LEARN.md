@@ -117,14 +117,12 @@ To make the portal feel "Premium," we removed all visual noise.
 - **N/A Management**: Instead of showing `N/A`, we use `{row.LINK || '—'}`. A dash (`—`) is visually "quieter" and more professional than text.
 - **Color Normalization**: Every status now belongs to a specific CSS class. If a status is `CANCELLED`, it gets a specific "Sekata Red" theme. This makes the UI predictable and calm.
 
-### 🪄 Pattern E: Global Component Architecture & Persistence
-We recently implemented the **Global Price Calculator** using a professional layout pattern.
-
-**How it works:**
-1.  **Shared State & Component**: We extracted the calculator into its own file (`PriceCalculator.jsx`).
-2.  **Global Injection**: Instead of putting it inside one page (like the Dashboard), we injected it into `App.jsx`, outside the `<Routes />`.
-3.  **Cross-Page Persistence**: Because it lives in the main App layout, it stays open and active even when the user navigates from the Masterlist to the Postage page. This is a common pattern used for chat widgets and global tools.
-4.  **Dynamic Rate Sync**: It uses a secondary fetcher to pull real-time exchange rates from a dedicated "Rates" tab in your Google Sheet, separating your business logic (rates) from your order data.
+### 💰 Pattern E: Global Component Architecture & Multi-Currency Sync
+The newest addition to the Luvlock Portal is the **Floating Price Calculator**. This demonstrates two advanced software architecture concepts:
+1.  **Global Component Logic:** By placing the `<PriceCalculator />` in `App.jsx` (outside the routing section), it persists across every single page. This is the same way professionals build global elements like Chat Bubbles or Notification Toasts.
+2.  **Dynamic Data Conversion:** The calculator fetches a separate Google Sheet (published as CSV) to stay updated with live market rates.
+    *   **The Logic:** `(amount * selectedCurrency?.Rate).toFixed(2)`
+    *   **The UI:** Uses a dedicated `PriceCalculator.jsx` component that manages its own internal state, meaning it doesn't cause unnecessary refreshes to the rest of the app! 🕵️‍♀️🎯🎀
 
 ---
 

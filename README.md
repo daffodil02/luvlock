@@ -32,10 +32,10 @@ Welcome to the **Luvlock Masterlist & Tracking Portal**! This is a custom-built,
   - Standardized status badges (including the high-contrast **CANCELLED** status).
 - **Production Ready 🚀**: 
   - Fully integrated live production Google Form links for the Postage Portal.
-- **Global Magic Calculator 🪄**: 
-  - A persistent, floating multi-currency price converter available on every page.
-  - Supports KRW, JPY, YUAN, BAHT, USD, and SGD with real-time exchange rates fetched directly from Google Sheets.
-  - Features a premium glassmorphic popup with automatic conversion to MYR.
+- **Floating Magic Calculator 🪄**: 
+  - A persistent, global price conversion tool available on every page.
+  - Features real-time multi-currency support (KRW, JPY, YUAN, BAHT, USD, SGD).
+  - Syncs exchange rates directly from an admin-controlled Google Sheet.
 
 ---
 
@@ -65,6 +65,7 @@ In `Dashboard.jsx`, we use React's `useState` to track searches.
 - **Regex for Flags**: Using **Regular Expressions** to scan tags for patterns like `KR` or `CN` and automatically wrap them in a stylized flag container.
 - **The Roadmap Toggle**: Using `useState` to manage the "Secret Roadmap" state, keeping the site clean while providing help when asked.
 - **Status Color Normalization**: Refining the status badges (READY, OTW, ARRIVED, etc.) to have specific "Sekata" color themes that work perfectly in both Light and Dark modes.
+- **Global Calculator**: A cross-page floating tool that performs real-time currency conversions using data live-synced from Google Sheets.
 
 ---
 

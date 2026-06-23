@@ -119,7 +119,7 @@ export default function PostageForm() { // Define the Postage Form page componen
           <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-2 font-header uppercase tracking-tight relative z-10">Postage 📮</h2>
           <h4 className="text-[13px] text-gray-700 dark:text-gray-100 mb-6 font-black uppercase tracking-wide">2. Submit Postage Form</h4>
           <div className="space-y-3 relative z-10">
-            <a href="https://forms.gle/4NbT1DP6ZgDahYLs6" target="_blank" rel="noopener noreferrer" className="group inline-flex items-center justify-center gap-3 w-full bg-pink-500 hover:bg-pink-600 text-white font-bold text-[12px] py-3 rounded-xl transition-all shadow-md active:scale-95 border border-pink-400/30 tracking-tight uppercase">
+            <a href="https://forms.gle/7XSdgGNnSq9Nq3BE7" target="_blank" rel="noopener noreferrer" className="group inline-flex items-center justify-center gap-3 w-full bg-pink-500 hover:bg-pink-600 text-white font-bold text-[12px] py-3 rounded-xl transition-all shadow-md active:scale-95 border border-pink-400/30 tracking-tight uppercase">
               <span>Fill Google Form</span><ExternalLink size={14} className="group-hover:rotate-12 transition-transform" />
             </a>
             <a href="https://docs.google.com/spreadsheets/d/1qxfSyjii5sBFWEYC7xNytYa860hPfjeFPFHCCtxVSAU/edit?gid=1319480873#gid=1319480873" target="_blank" rel="noopener noreferrer" className="group inline-flex items-center justify-center gap-3 w-full bg-white dark:bg-pink-950/20 text-pink-500 hover:bg-pink-50 dark:hover:bg-pink-900/40 font-bold text-[11px] py-2.5 rounded-xl transition-all border border-pink-100 dark:border-pink-800/50 shadow-sm tracking-tight text-center uppercase">
