@@ -16,8 +16,9 @@ import {
   Heart,
   List,
   MapPin,
+  Image,
 } from "lucide-react";
-import { fetchOrders } from "../data"; // Import our custom data fetching function
+import { fetchOrders, PRINTS_DRIVE_URL } from "../data"; // Import our custom data fetching function and prints drive URL
 
 export default function Dashboard() {
   // Main Dashboard component
@@ -347,6 +348,32 @@ export default function Dashboard() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Track Your Prints Section */}
+      <div className="glass rounded-3xl p-5 md:p-6 flex flex-col sm:flex-row items-center justify-between gap-4 border border-pink-100 dark:border-pink-900/30">
+        <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
+          <div className="w-12 h-12 rounded-2xl bg-pink-500/10 text-pink-500 flex items-center justify-center flex-shrink-0 dark:bg-pink-400/10 dark:text-pink-400">
+            <Image size={24} />
+          </div>
+          <div>
+            <h3 className="text-base font-black text-pink-600 dark:text-pink-400 tracking-wide uppercase font-header">
+              Track Your Prints! 📸
+            </h3>
+            <p className="text-xs text-gray-500 dark:text-gray-400 font-medium mt-0.5">
+              Click to view your printtie, pbox, and netprints orders here.
+            </p>
+          </div>
+        </div>
+        <a
+          href={PRINTS_DRIVE_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-pink-500 hover:bg-pink-600 text-white font-black px-6 py-3 rounded-2xl text-xs uppercase tracking-widest transition-all active:scale-95 shadow-md shadow-pink-200/50 dark:shadow-none"
+        >
+          <span>Open Google Drive</span>
+          <ExternalLink size={14} />
+        </a>
+      </div>
 
       {/* Search & Filter Section */}
       <div className="glass rounded-3xl p-5 md:p-6 space-y-4">

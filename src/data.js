@@ -1,5 +1,8 @@
 import Papa from 'papaparse'; // Import PapaParse, a powerful library for parsing CSV (Comma Separated Values) files
 
+// Direct Google Drive link for prints tracking
+export const PRINTS_DRIVE_URL = 'https://drive.google.com/drive/u/1/folders/1l1SGtWvnksn8ALEFy-Kjf0XBl_OdfhuE?usp=sharing';
+
 // A set of public Google Sheet URLs exported as CSV format
 export const SHEET_URLS = {
   // Array of multiple sheet URLs for different order sections
