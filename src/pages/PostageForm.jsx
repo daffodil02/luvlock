@@ -226,7 +226,8 @@ export default function PostageForm() {
         </motion.div>
       </div>
 
-      {/* Postage Table Section */}
+      {/* Postage Table Section (Hidden) */}
+      {/* 
       <div className="glass rounded-3xl shadow-xl shadow-pink-100/50 dark:shadow-none flex flex-col overflow-hidden border border-pink-100 dark:border-pink-900/30">
         <div className="p-4 md:p-5 space-y-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 border-b border-pink-100 dark:border-pink-900/30 pb-6 uppercase tracking-tight">
@@ -341,7 +342,6 @@ export default function PostageForm() {
                             className="border-b border-pink-50/50 dark:border-pink-900/10 hover:bg-pink-50/30 dark:hover:bg-pink-950/10 transition-colors"
                           >
                             <td className="py-5 px-5 text-pink-600 dark:text-pink-400 font-black tracking-tight tracking-tight">
-                              {/* Change: Tag with Flag Logic Sync and N/A cleanup! 🕵️‍♀️🎯 */}
                               {formatTagWithFlag(row.TAG || row.CODE)}
                             </td>
                             <td className="py-5 px-5 text-gray-700 dark:text-gray-200 font-black tracking-tight">
@@ -373,7 +373,6 @@ export default function PostageForm() {
           </div>
         </div>
 
-        {/* Pagination Section */}
         <div className="bg-pink-50/50 dark:bg-pink-950/20 px-6 py-4 border-t border-pink-100 dark:border-pink-900/50 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <label className="text-[10px] font-black uppercase text-pink-400 tracking-widest leading-none">
@@ -415,7 +414,6 @@ export default function PostageForm() {
           </div>
         </div>
 
-        {/* Status Legend */}
         <div className="bg-pink-50/10 dark:bg-pink-950/20 px-6 py-3 border-t border-pink-100 dark:border-pink-900/30 flex flex-wrap items-center gap-x-4 gap-y-2 uppercase tracking-widest opacity-80">
           <p className="text-[9px] font-black text-gray-400 dark:text-gray-500">
             Key:
@@ -448,6 +446,7 @@ export default function PostageForm() {
           ))}
         </div>
       </div>
+      */}
     </motion.div>
   );
 }
