@@ -163,33 +163,41 @@ export default function Dashboard() {
   const statusColors = (status) => {
     const s = (status || "").toLowerCase();
 
-    // 1. Ready/Secured - Blue
+    // 1. Secured - Solid Orange
     if (s.includes("secured"))
-      return "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300 border-blue-200 dark:border-blue-800";
+      return "bg-orange-500 text-white shadow-sm shadow-orange-200 dark:shadow-none";
 
-    // 2. Arrived (PA, WH, Proxy) - Purple
-    if (s.includes("arrived"))
-      return "bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300 border-purple-200 dark:border-purple-800";
+    // 2. Arrived PA - Solid Pink (must be checked BEFORE general "arrived")
+    if (s.includes("arrived pa"))
+      return "bg-pink-500 text-white shadow-sm shadow-pink-200 dark:shadow-none";
 
-    // 3. Shipped/OTW - Green Light shade match
+    // 3. Arrived Proxy - Solid Dark Blue / Indigo (check before general "arrived")
+    if (s.includes("arrived proxy"))
+      return "bg-indigo-700 text-white shadow-sm shadow-indigo-300 dark:shadow-none";
+
+    // 4. Arrived WH - Solid Blue
+    if (s.includes("arrived wh") || s.includes("arrived"))
+      return "bg-blue-500 text-white shadow-sm shadow-blue-200 dark:shadow-none";
+
+    // 5. Shipped - Solid Brown (amber)
     if (s.includes("shipped"))
-      return "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300 border-green-200 dark:border-green-800";
+      return "bg-amber-700 text-white shadow-sm shadow-amber-200 dark:shadow-none";
 
-    // 4. OTW Logic - Pink
-    if (s.includes("otw"))
-      return "bg-pink-100 text-pink-700 dark:bg-pink-900/40 dark:text-pink-300 border-pink-100 dark:border-pink-800";
-
-    // 5. COMPLETED - Custom Green
+    // 6. COMPLETED - Custom Solid Green
     if (s.includes("completed"))
       return "bg-green-500 text-white shadow-sm shadow-green-200 dark:shadow-none";
 
-    // 6. CANCELLED - Red Alert!
-    if (s.includes("cancelled"))
-      return "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300 border-red-200 dark:border-red-800";
+    // 7. CANCELLED / SOLD OUT / PROBLEM - Solid Red Alert
+    if (s.includes("cancelled") || s.includes("sold out") || s.includes("problem"))
+      return "bg-red-500 text-white shadow-sm shadow-red-200 dark:shadow-none";
 
-    // 7. BILLED EMS - Orange
+    // 8. BILLED EMS - Solid Purple
     if (s.includes("billed ems"))
-      return "bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-300 border-orange-200 dark:border-orange-800";
+      return "bg-purple-600 text-white shadow-sm shadow-purple-200 dark:shadow-none";
+
+    // 9. READY FOR POSTAGE - Solid Yellow
+    if (s.includes("ready for postage"))
+      return "bg-yellow-400 text-white shadow-sm shadow-yellow-200 dark:shadow-none";
 
     return "bg-gray-100 text-gray-400 dark:bg-gray-800 dark:text-gray-500 border-gray-200 dark:border-gray-700";
   };
