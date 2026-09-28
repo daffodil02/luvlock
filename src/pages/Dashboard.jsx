@@ -17,6 +17,8 @@ import {
   List,
   MapPin,
   Image,
+  Copy,
+  Check,
 } from "lucide-react";
 import { fetchOrders, PRINTS_DRIVE_URL } from "../data"; // Import our custom data fetching function and prints drive URL
 
@@ -28,6 +30,7 @@ export default function Dashboard() {
   const [displayedOrders, setDisplayedOrders] = useState([]); // State for orders after applying secondary filters
   const [isLoading, setIsLoading] = useState(true); // State to show/hide the loading spinner
   const [showGuide, setShowGuide] = useState(false); // Change: Toggle state for Roadmap! 🕵️‍♀️🎯
+  const [copySuccess, setCopySuccess] = useState(false);
 
   // Pagination States
   const [currentPage, setCurrentPage] = useState(1);
@@ -97,6 +100,28 @@ export default function Dashboard() {
     setStatusFilter("all");
     setCodeFilter("all");
     setPaymentFilter("all");
+  };
+
+  const handleBulkCopy = () => {
+    if (displayedOrders.length === 0) return;
+    
+    // Create tab-separated text for Excel/Sheets pasting
+    const header = "Tag/Batch\tSpecification\tQuantity";
+    const rows = displayedOrders.map((order) => {
+      const tag = order.TAG || order.CODE || "—";
+      const spec = toTitleCase(order.SPECIFICATION) || "—";
+      const qtt = order.QTT || "1";
+      return `${tag}\t${spec}\t${qtt}`;
+    });
+    
+    const textToCopy = [header, ...rows].join("\n");
+    
+    navigator.clipboard.writeText(textToCopy).then(() => {
+      setCopySuccess(true);
+      setTimeout(() => setCopySuccess(false), 2000);
+    }).catch((err) => {
+      console.error("Failed to copy text: ", err);
+    });
   };
 
   const uniqueStatuses = [
@@ -601,20 +626,31 @@ export default function Dashboard() {
 
       {/* Results Section */}
       <div className="space-y-4">
-        <div className="flex items-center justify-between px-2">
+        <div className="flex items-center justify-between px-2 mb-2">
           <h3 className="font-bold text-gray-700 dark:text-gray-300 flex items-center gap-2 uppercase tracking-tight text-sm">
             <Box size={18} className="text-pink-500" />
             {searchTerm && isSearched
               ? "Search Results"
               : "Welcome to the Masterlist!"}
           </h3>
-          {searchTerm && isSearched && (
-            <span className="text-[10px] font-bold text-pink-400 dark:text-pink-500 uppercase tracking-widest">
-              Showing {indexOfFirstItem + 1}-
-              {Math.min(indexOfLastItem, displayedOrders.length)} of{" "}
-              {displayedOrders.length}
-            </span>
-          )}
+          <div className="flex items-center gap-3">
+            {displayedOrders.length > 0 && (
+              <button
+                onClick={handleBulkCopy}
+                className="flex items-center gap-1.5 px-3 py-2 bg-pink-500 text-white hover:bg-pink-600 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all active:scale-95 shadow-md shadow-pink-200/50 dark:shadow-none"
+              >
+                {copySuccess ? <Check size={14} /> : <Copy size={14} />}
+                <span>{copySuccess ? "Copied!" : "Copy Data"}</span>
+              </button>
+            )}
+            {searchTerm && isSearched && (
+              <span className="text-[10px] font-bold text-pink-400 dark:text-pink-500 uppercase tracking-widest hidden sm:inline-block">
+                Showing {indexOfFirstItem + 1}-
+                {Math.min(indexOfLastItem, displayedOrders.length)} of{" "}
+                {displayedOrders.length}
+              </span>
+            )}
+          </div>
         </div>
 
         {isLoading ? (
